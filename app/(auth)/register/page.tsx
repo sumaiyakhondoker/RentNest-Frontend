@@ -1,5 +1,4 @@
 
-
 const RegisterPage = () => {
     return (
         <div>
