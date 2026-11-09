@@ -2,27 +2,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 const LoginPage = () => {
     return (
         <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md space-y-8">
-        {/* Brand */}
-        <div className="flex flex-col items-center gap-3">
-          <Link
-            href="/"
-            className="flex size-12 items-center justify-center rounded-xl bg-primary text-xl font-bold text-primary-foreground"
-          >
-            R
-          </Link>
-
-          <span className="text-xl font-semibold tracking-tight text-foreground">
-            RentNest
-          </span>
-        </div>
-
+        
         {/* Login Card */}
         <Card className="border-border bg-card shadow-sm">
           <CardHeader className="space-y-2 text-center">
@@ -94,10 +81,7 @@ const LoginPage = () => {
           </CardFooter>
         </Card>
 
-        {/* Footer */}
-        <p className="text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} RentNest. All rights reserved.
-        </p>
+        
       </div>
     </div>
     );
