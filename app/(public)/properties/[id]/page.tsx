@@ -1,76 +1,88 @@
 
-// import { notFound } from "next/navigation";
-// import { Separator } from "@/components/ui/separator";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
-// import { PropertyHeader } from "@/components/property-details/server/property-header";
-// import { PropertyImage } from "@/components/property-details/server/property-image";
-// import { PropertyAbout } from "@/components/property-details/server/property-about";
-// import { PropertyOverview } from "@/components/property-details/server/property-overview";
-// import { PropertyAmenities } from "@/components/property-details/server/property-amenities";
-// import { RentalSummary } from "@/components/property-details/server/rental-summary";
+import { Separator } from "@/components/ui/separator";
 
-// import {
-//   getPropertyById,
-//   getCategoryName,
-// } from "@/lib/services/properties";
+import { getPropertyDetails } from "../../_actions/getPropertyDetails";
+import PropertyDetailsHeader from "../../_components/properties/details/PropertyDetailsHeader";
+import PropertyImage from "../../_components/properties/details/PropertyImage";
+import PropertyAbout from "../../_components/properties/details/PropertyAbout";
+import PropertyOverview from "../../_components/properties/details/PropertyOverview";
+import PropertyAmenities from "../../_components/properties/details/PropertyAmenities";
+import RentalRequest from "../../_components/properties/details/RentalRequest";
+import PropertyReviews from "../../_components/properties/details/PropertyReviews";
 
-// type PageProps = {
-//   params: Promise<{ id: string }>;
-// };
 
-// export default async function PropertyDetailsPage({
-//   params,
-// }: PageProps) {
-//   const { id } = await params;
+type PageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
 
-//   const property = await getPropertyById(id);
+export const metadata: Metadata = {
+  title: "Property Details | RentNest",
+  description: "View rental property details on RentNest",
+};
 
-//   if (!property) {
-//     notFound();
-//   }
 
-//   const categoryName = await getCategoryName(
-//     property.categoryId
-//   );
 
-//   return (
-//     <main className="min-h-screen bg-background">
-//       {/* Reuse the existing shared Navbar in your layout */}
+const PropertyDetailsPage = async({
+  params,
+}: PageProps)=>{
+  const { id } = await params;
 
-//       <div className="mx-auto max-w-[1280px] space-y-10 px-4 pb-14 pt-8 xl:px-0">
-//         <PropertyHeader
-//           property={property}
-//           categoryName={categoryName}
-//         />
+  const result = await getPropertyDetails(id);
 
-//         <PropertyImage property={property} />
+  if (!result.success || !result.data) {
+    notFound();
+  }
 
-//         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,804px)_380px]">
-//           <div className="space-y-10">
-//             <PropertyAbout
-//               description={property.description}
-//             />
+  const property = result.data;
 
-//             <Separator />
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="mx-auto max-w-7xl space-y-10 px-4 pb-16 pt-9 xl:px-0">
+        {/* Property Title, Location, Availability */}
+        <PropertyDetailsHeader property={property} />
 
-//             <PropertyOverview
-//               property={property}
-//               categoryName={categoryName}
-//             />
+        {/* Single main Image */}
+        <PropertyImage
+          title={property.title}
+          picture={property.picture}
+        />
 
-//             <PropertyAmenities
-//               amenities={property.amenities}
-//             />
-//           </div>
+        {/* Property Information and Rental Card */}
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-12">
+          <div className="space-y-10">
+            <PropertyAbout
+              description={property.description}
+            />
 
-//           <aside className="lg:sticky lg:top-6">
-//             <RentalSummary
-//               property={property}
-//               categoryName={categoryName}
-//             />
-//           </aside>
-//         </div>
-//       </div>
-//     </main>
-//   );
-// }
+            <Separator />
+
+            <PropertyOverview property={property} />
+
+            <PropertyAmenities
+              amenities={property.amenities}
+            />
+          </div>
+
+          <aside>
+            <RentalRequest property={property} />
+          </aside>
+        </div>
+
+        <Separator />
+
+        {/* Customer Reviews */}
+        <PropertyReviews
+          reviews={property.reviews ?? []}
+        />
+      </div>
+    </div>
+  );
+}
+
+
+export default  PropertyDetailsPage

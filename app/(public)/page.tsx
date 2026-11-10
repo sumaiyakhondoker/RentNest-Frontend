@@ -1,7 +1,7 @@
 "use server"
 
 import HeroSection from "./_components/home/HeroSection";
-import PropertiesSection from "./_components/PropertiesSection";
+import PropertiesSection from "./_components/home/PropertiesSection";
 
 
 const HomePage = async() => {
