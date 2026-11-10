@@ -29,7 +29,7 @@ const RegisterForm=()=> {
       phone: "",
       role: "TENANT",
       password: "",
-      confirmPassword: "",
+     
     },
   });
 
