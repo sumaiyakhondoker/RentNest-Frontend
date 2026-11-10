@@ -9,7 +9,7 @@ const navItems = [
   { label: "Properties", href: "/properties" },
 ];
 
-export function Navbar() {
+const Navbar =()=> {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -80,3 +80,5 @@ export function Navbar() {
     </header>
   );
 }
+
+export default Navbar

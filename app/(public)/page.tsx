@@ -1,14 +1,14 @@
 "use server"
 
-import { HeroSection } from "./_components/heroSection";
-// import { PropertiesSection } from "./_components/propertiesSection";
+import HeroSection from "./_components/home/HeroSection";
+import PropertiesSection from "./_components/PropertiesSection";
 
 
 const HomePage = async() => {
   return (
     <div>
-      <HeroSection />
-      {/* <PropertiesSection /> */}
+      <HeroSection/>
+      <PropertiesSection />
     </div>
   );
 }

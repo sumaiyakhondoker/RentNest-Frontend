@@ -1,12 +1,7 @@
-/**
- * 
- * এখানে picture backend থেকে আসছে। External image hostname allow করার জন্য next.config.ts-এ image hosting domain configure করতে হবে। Image URL কোন host থেকে আসছে তা জানা না থাকায় এখন অনুমান করে কোনো domain add করছি না।
- */
 
+"use client";
 
-
-
-
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -16,33 +11,49 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { Property } from "@/lib/types";
-
+import type { Property } from "@/lib/types";
 
 type PropertyCardProps = {
   property: Property;
 };
 
-export function PropertyCard({
-  property,
-}: PropertyCardProps) {
+const PLACEHOLDER_IMAGE = "/property-placeholder.png";
+
+const PropertyCard = ({ property }: PropertyCardProps) => {
+  const [failedImageUrl, setFailedImageUrl] = useState<string | null>(null);
+
+  const picture = property.picture?.trim() ?? "";
+
+  const isValidUrl = (() => {
+    try {
+      const url = new URL(picture);
+      return url.protocol === "https:" || url.protocol === "http:";
+    } catch {
+      return false;
+    }
+  })();
+
+  const imageSrc =
+    isValidUrl && failedImageUrl !== picture
+      ? picture
+      : PLACEHOLDER_IMAGE;
+
   return (
     <Card className="group gap-0 overflow-hidden border-border py-0 transition-shadow hover:shadow-lg">
       <div className="relative aspect-4/3 overflow-hidden bg-muted">
-        {property.picture ? (
-          <Image
-            src={property.picture}
-            alt={property.title}
-            fill
-            unoptimized
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-            No image available
-          </div>
-        )}
+        <Image
+          src={imageSrc}
+          alt={property.title}
+          fill
+          unoptimized
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          onError={() => {
+            if (imageSrc !== PLACEHOLDER_IMAGE) {
+              setFailedImageUrl(picture);
+            }
+          }}
+        />
 
         <Badge
           variant={
@@ -96,4 +107,6 @@ export function PropertyCard({
       </CardFooter>
     </Card>
   );
-}
+};
+
+export default PropertyCard;

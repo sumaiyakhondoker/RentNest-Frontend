@@ -4,8 +4,9 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
-import { Navbar } from '@/components/shared/navbar';
-import { Footer } from '@/components/shared/footer';
+import  Navbar  from '@/components/shared/Navbar';
+import Footer from '@/components/shared/Footer';
+
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 

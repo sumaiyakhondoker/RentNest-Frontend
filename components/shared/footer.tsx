@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 
-export function Footer() {
+const Footer =()=> {
 
   return (
     <footer className="border-t border-border bg-muted/40 sticky">
@@ -63,3 +63,5 @@ export function Footer() {
     </footer>
   );
 }
+
+export default Footer

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function HeroSection() {
+const HeroSection =() => {
   return (
     <section className="relative isolate flex min-h-135 items-center overflow-hidden bg-primary/10 py-24
      sm:min-h-155">
@@ -53,3 +53,5 @@ export function HeroSection() {
     </section>
   );
 }
+
+export default HeroSection
