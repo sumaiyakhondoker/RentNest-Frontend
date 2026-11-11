@@ -1,5 +1,6 @@
 
 import { Badge } from "@/components/ui/badge";
+import { CircleCheck } from "lucide-react";
 
 type Props = {
   amenities: string[];
@@ -27,7 +28,7 @@ export default function PropertyAmenities({
               className="rounded-[9px] px-4 py-3 text-xs font-semibold"
             >
               <span className="mr-2 text-primary">
-                ✓
+               <CircleCheck />
               </span>
               {amenity}
             </Badge>

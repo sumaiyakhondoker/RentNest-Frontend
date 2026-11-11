@@ -1,9 +1,12 @@
-import React from 'react';
+import { getMe } from "@/service/getMe";
 
-const DashboardLayout = ({ children }: LayoutProps<"/">) => {
+
+
+const DashboardLayout =async ({ children }: LayoutProps<"/dashboard">) => {
+    const user = await getMe()
     return (
         <div>
-           {children}
+            {children}
         </div>
     );
 };

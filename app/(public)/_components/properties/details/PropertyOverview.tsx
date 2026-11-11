@@ -9,30 +9,32 @@ type Props = {
  const PropertyOverview=({
   property,
 }: Props)=> {
-  const details = [
-    {
-      label: "Monthly rent",
-      value: `৳${property.price.toLocaleString("en-BD")}`,
-      icon: "৳",
-    },
-    {
-      label: "Availability",
-      value: property.availability === "AVAILABLE"
-        ? "Available"
-        : "Rented",
-      icon: "✓",
-    },
-    {
-      label: "Amenities",
-      value: property.amenities.length.toString(),
-      icon: "✦",
-    },
-    {
-      label: "Reviews",
-      value: property.reviews.length.toString(),
-      icon: "★",
-    },
-  ];
+
+
+  // const details = [
+  //   {
+  //     label: "Monthly rent",
+  //     value: `৳${property.price.toLocaleString("en-BD")}`,
+  //     icon: "৳",
+  //   },
+  //   {
+  //     label: "Availability",
+  //     value: property.availability === "AVAILABLE"
+  //       ? "Available"
+  //       : "Rented",
+  //     icon: "✓",
+  //   },
+  //   {
+  //     label: "Amenities",
+  //     value: property.amenities.length.toString(),
+  //     icon: "✦",
+  //   },
+  //   {
+  //     label: "Reviews",
+  //     value: property.reviews.length.toString(),
+  //     icon: "★",
+  //   },
+  // ];
 
   return (
     <section className="space-y-6">
@@ -41,7 +43,7 @@ type Props = {
       </h2>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {details.map((detail) => (
+        {/* {details.map((detail) => (
           <Card
             key={detail.label}
             className="h-[100px] rounded-xl py-0 shadow-none"
@@ -65,7 +67,7 @@ type Props = {
               </p>
             </CardContent>
           </Card>
-        ))}
+        ))} */}
       </div>
     </section>
   );

@@ -73,41 +73,38 @@ const LoginForm = () => {
 
               {/* Password */}
               <div className="space-y-2">
-                <Label htmlFor="password">
-                  Password
-                </Label>
+  <Label htmlFor="password">Password</Label>
 
-                <div className="relative">
+  <div className="relative">
+    <Input
+      id="password"
+      type={showPassword ? "text" : "password"}
+      placeholder="Enter your password"
+      autoComplete="current-password"
+      aria-invalid={!!errors.password}
+      className="h-11 pr-12"
+      {...register("password")}
+    />
 
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  autoComplete="current-password"
-                  aria-invalid={!!errors.password}
-                  className="h-11"
-                  {...register("password")}
-                />
+    <Button
+      type="button"
+      variant="ghost"
+      size="icon-sm"
+      aria-label={showPassword ? "Hide password" : "Show password"}
+      aria-pressed={showPassword}
+      className="absolute top-1/2 right-1 -translate-y-1/2"
+      onClick={() => setShowPassword((visible) => !visible)}
+    >
+      {showPassword ? <EyeOff /> : <Eye />}
+    </Button>
+  </div>
 
-                 <Button
-            type="button"
-            variant="ghost"
-            size="icon-sm"
-            aria-label={showPassword ? "Hide password" : "Show password"}
-            aria-pressed={showPassword}
-            className="absolute top-1/2 right-1 -translate-y-1/2"
-            onClick={() => setShowPassword((visible) => !visible)}
-          >
-            {showPassword ? <EyeOff /> : <Eye />}
-          </Button>
-
+  {errors.password && (
+    <p role="alert" className="text-sm text-destructive">
+      {errors.password.message}
+    </p>
+  )}
 </div>
-                {errors.password && (
-                  <p role="alert" className="text-sm text-destructive">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
 
               <Button
                 type="submit"

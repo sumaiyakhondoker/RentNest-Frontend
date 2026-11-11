@@ -11,8 +11,8 @@ import RegisterForm from "../_components/RegisterForm";
 
 const RegisterPage=()=> {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-6">
-      <div className="w-full max-w-md">
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <div className="w-full max-w-md  my-5">
         <Card className="border-border bg-card shadow-sm">
           <CardHeader className="space-y-2 text-center">
             <CardTitle className="text-2xl font-semibold tracking-tight">

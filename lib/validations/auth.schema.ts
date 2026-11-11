@@ -18,12 +18,20 @@ export const registerSchema = z
       .trim()
       .min(3, "Name must be at least 3 characters."),
     email: z.email("Please enter a valid email address."),
-    phone: z
-      .string()
-      .trim()
-      .refine((value) => value === "" || value.length === 11, {
-        message: "Phone number must contain exactly 11 characters.",
-      }),
+    profileImage: z
+  .union([
+    z.literal(""),
+    z.url("Please enter a valid profile picture URL."),
+  ])
+  .optional(),
+
+phone: z
+  .string()
+  .trim()
+  .refine((value) => value === "" || /^\d{11}$/.test(value), {
+    message: "Phone number must contain exactly 11 digits.",
+  })
+  .optional(),
     role: z.enum(["TENANT", "LANDLORD"], {
       error: "Please choose Tenant or Landlord.",
     }),

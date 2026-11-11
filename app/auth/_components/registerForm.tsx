@@ -27,6 +27,7 @@ const RegisterForm=()=> {
       name: "",
       email: "",
       phone: "",
+      profileImage:"",
       role: "TENANT",
       password: "",
      
@@ -109,6 +110,33 @@ const RegisterForm=()=> {
           </p>
         )}
       </div>
+
+
+      
+<div className="space-y-2">
+  <Label htmlFor="profileImage">
+    Profile picture URL (optional)
+  </Label>
+  <Input
+    id="profileImage"
+    type="url"
+    placeholder="https://example.com/profile.jpg"
+    autoComplete="url"
+    aria-invalid={!!errors.profileImage}
+    className="h-10"
+    {...register("profileImage")}
+  />
+  <p className="text-xs text-muted-foreground">
+    Enter a valid image URL or leave it blank.
+  </p>
+  {errors.profileImage && (
+    <p role="alert" className="text-sm text-destructive">
+      {errors.profileImage.message}
+    </p>
+  )}
+</div>
+
+
 
       <div className="space-y-2">
         <Label htmlFor="role">Account type</Label>
