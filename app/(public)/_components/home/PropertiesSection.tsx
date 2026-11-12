@@ -28,7 +28,7 @@ const PropertiesSection = () => {
         </Suspense>
 
         <div className="my-6 flex w-full items-center justify-center">
-          <Button variant="outlineBorder" asChild>
+          <Button variant="outline" className="border-primary" asChild>
             <Link href="/properties">View All Properties</Link>
           </Button>
         </div>

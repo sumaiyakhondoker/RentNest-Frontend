@@ -50,3 +50,32 @@ export type PropertyDetailsResponse = {
   data: PropertyDetails;
 };
 
+export type RentalRequest = {
+  id: string;
+  propertyId: string;
+  status: "PENDING" | "APPROVED" | "REJECTED" | "ACTIVE" | "COMPLETED";
+  createdAt: string;
+  property?: Property;
+};
+
+export type RentalRequestsResponse = {
+  success: boolean;
+  message: string;
+  data: { totalRentalRequests: number; allRentalRequests: RentalRequest[] };
+};
+
+export type Payment = {
+  id: string;
+  rentalRequestId: string;
+  amount: number;
+  status: "PENDING" | "COMPLETED" | "FAILED";
+  provider: string;
+  createdAt: string;
+};
+
+export type PaymentsResponse = {
+  success: boolean;
+  message: string;
+  data: Payment[];
+};
+

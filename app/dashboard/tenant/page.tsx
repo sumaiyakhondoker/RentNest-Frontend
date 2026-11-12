@@ -1,11 +1,12 @@
+import TenantSidebar from "./_components/TenantSidebar";
+import TenantDashboardContent from "./_components/TenantDashboardContent";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
-
-const TenantDashboardPage = () => {
-    return (
-        <div>
-            TenantDashboardPage
-        </div>
-    );
-};
-
-export default TenantDashboardPage;
+export default function TenantDashboardPage() {
+  return (
+    <SidebarProvider>
+      <TenantSidebar />
+      <TenantDashboardContent />
+    </SidebarProvider>
+  );
+}
