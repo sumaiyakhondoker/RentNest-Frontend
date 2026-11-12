@@ -51,7 +51,7 @@ const LoginForm = () => {
               {/* Email */}
               <div className="space-y-2">
                 <Label htmlFor="email">
-                  Email address
+                  Email address *
                 </Label>
 
                 <Input
@@ -73,7 +73,7 @@ const LoginForm = () => {
 
               {/* Password */}
               <div className="space-y-2">
-  <Label htmlFor="password">Password</Label>
+  <Label htmlFor="password">Password *</Label>
 
   <div className="relative">
     <Input

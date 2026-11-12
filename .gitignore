@@ -39,4 +39,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-nextjs-prisma-press-frontend
+nextjs-prisma-press-frontend/
