@@ -53,7 +53,7 @@ const RegisterForm=()=> {
       className="space-y-4"
     >
       <div className="space-y-2">
-        <Label htmlFor="name">Full name</Label>
+        <Label htmlFor="name">Full name *</Label>
         <Input
           id="name"
           type="text"
@@ -71,7 +71,7 @@ const RegisterForm=()=> {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email address</Label>
+        <Label htmlFor="email">Email address *</Label>
         <Input
           id="email"
           type="email"
@@ -139,7 +139,7 @@ const RegisterForm=()=> {
 
 
       <div className="space-y-2">
-        <Label htmlFor="role">Account type</Label>
+        <Label htmlFor="role">Account type *</Label>
         <select
           id="role"
           aria-invalid={!!errors.role}
@@ -157,7 +157,7 @@ const RegisterForm=()=> {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">Password *</Label>
         <div className="relative">
           <Input
             id="password"
