@@ -88,3 +88,20 @@ export type CreatePaymentResponse = {
   data?: { checkoutUrl?: string | null };
 };
 
+export type UserProfile = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  role: "TENANT" | "LANDLORD" | "ADMIN";
+  accountStatus: "ACTIVE" | "BANNED";
+  profileImage: string | null;
+  createdAt: string;
+};
+
+export type MyProfileResponse = {
+  success: boolean;
+  message: string;
+  data?: { profile: UserProfile };
+};
+

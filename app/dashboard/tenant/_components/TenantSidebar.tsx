@@ -16,7 +16,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 
-export default function TenantSidebar({ active = "overview" }: { active?: "overview" | "requests" }) {
+export default function TenantSidebar({ active = "overview" }: { active?: "overview" | "requests" | "payments" | "profile" }) {
   return (
     <Sidebar collapsible="offcanvas">
       <SidebarHeader className="px-4 pt-5">
@@ -35,8 +35,8 @@ export default function TenantSidebar({ active = "overview" }: { active?: "overv
             <SidebarMenu>
               <SidebarMenuItem><SidebarMenuButton asChild isActive={active === "overview"} className={active === "overview" ? "text-primary" : undefined}><Link href="/dashboard/tenant" aria-current={active === "overview" ? "page" : undefined}><LayoutGrid /> <span>Overview</span></Link></SidebarMenuButton></SidebarMenuItem>
               <SidebarMenuItem><SidebarMenuButton asChild isActive={active === "requests"} className={active === "requests" ? "text-primary" : undefined}><Link href="/dashboard/tenant/requests" aria-current={active === "requests" ? "page" : undefined}><ListChecks /> <span>My rental requests</span></Link></SidebarMenuButton></SidebarMenuItem>
-              <SidebarMenuItem><SidebarMenuButton disabled><CreditCard /> <span>Payment history</span></SidebarMenuButton></SidebarMenuItem>
-              <SidebarMenuItem><SidebarMenuButton disabled><UserRound /> <span>My profile</span></SidebarMenuButton></SidebarMenuItem>
+              <SidebarMenuItem><SidebarMenuButton asChild isActive={active === "payments"} className={active === "payments" ? "text-primary" : undefined}><Link href="/dashboard/tenant/payments" aria-current={active === "payments" ? "page" : undefined}><CreditCard /> <span>Payment history</span></Link></SidebarMenuButton></SidebarMenuItem>
+              <SidebarMenuItem><SidebarMenuButton asChild isActive={active === "profile"} className={active === "profile" ? "text-primary" : undefined}><Link href="/dashboard/tenant/profile" aria-current={active === "profile" ? "page" : undefined}><UserRound /> <span>My profile</span></Link></SidebarMenuButton></SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
