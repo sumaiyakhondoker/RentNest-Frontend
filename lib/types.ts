@@ -85,6 +85,7 @@ export type PaymentsResponse = {
 export type PaymentDetails = Payment & {
   transactionId: string | null;
   paidAt: string | null;
+  rentalRequest?: RentalRequest | null;
 };
 
 export type PaymentDetailsResponse = {
