@@ -1,6 +1,8 @@
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import type { RentalRequest } from "@/lib/types";
+import { createPayment } from "../_actions/createPayment";
+import RentalStatusBadge from "./RentalStatusBadge";
 
 export default function RecentRentalRequests({
   rentals,
@@ -19,13 +21,6 @@ export default function RecentRentalRequests({
     new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(
       new Date(value),
     );
-  const statusColor: Record<RentalRequest["status"], string> = {
-    PENDING: "bg-muted text-foreground",
-    APPROVED: "bg-primary/10 text-primary",
-    REJECTED: "bg-destructive/10 text-destructive",
-    ACTIVE: "bg-primary/10 text-primary",
-    COMPLETED: "bg-secondary text-secondary-foreground",
-  };
   return (
     <Card className="gap-0 rounded-xl py-0 shadow-none">
       <CardContent className="p-5 sm:p-6">
@@ -49,7 +44,8 @@ export default function RecentRentalRequests({
                   <th className="rounded-l-lg px-4 py-4">PROPERTY</th>
                   <th className="px-3 py-4">REQUESTED</th>
                   <th className="px-3 py-4">RENT</th>
-                  <th className="rounded-r-lg px-3 py-4">STATUS</th>
+                  <th className="px-3 py-4">STATUS</th>
+                  <th className="rounded-r-lg px-3 py-4">ACTION</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,12 +66,19 @@ export default function RecentRentalRequests({
                       {item.property ? money(item.property.price) : "—"}
                     </td>
                     <td className="px-3 py-4">
-                      <Badge
-                        variant="secondary"
-                        className={statusColor[item.status]}
-                      >
-                        {item.status[0] + item.status.slice(1).toLowerCase()}
-                      </Badge>
+                      <RentalStatusBadge status={item.status} />
+                    </td>
+                    <td className="px-3 py-4">
+                      {item.status === "APPROVED" && (
+                        <form action={createPayment.bind(null, item.id)}>
+                          <Button type="submit" size="sm">Pay Now</Button>
+                        </form>
+                      )}
+                      {item.status === "ACTIVE" && (
+                        <Button size="sm" disabled title="Review form is coming soon">
+                          Leave Review
+                        </Button>
+                      )}
                     </td>
                   </tr>
                 ))}

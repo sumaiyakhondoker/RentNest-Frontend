@@ -54,6 +54,9 @@ export type RentalRequest = {
   id: string;
   propertyId: string;
   status: "PENDING" | "APPROVED" | "REJECTED" | "ACTIVE" | "COMPLETED";
+  moveInDate?: string | null;
+  leaseEndDate?: string | null;
+  message?: string | null;
   createdAt: string;
   property?: Property;
 };
@@ -77,5 +80,11 @@ export type PaymentsResponse = {
   success: boolean;
   message: string;
   data: Payment[];
+};
+
+export type CreatePaymentResponse = {
+  success: boolean;
+  message?: string;
+  data?: { checkoutUrl?: string | null };
 };
 

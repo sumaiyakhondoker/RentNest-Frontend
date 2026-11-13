@@ -16,7 +16,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 
-export default function TenantSidebar() {
+export default function TenantSidebar({ active = "overview" }: { active?: "overview" | "requests" }) {
   return (
     <Sidebar collapsible="offcanvas">
       <SidebarHeader className="px-4 pt-5">
@@ -33,8 +33,8 @@ export default function TenantSidebar() {
           <SidebarGroupLabel>YOUR SPACE</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem><SidebarMenuButton asChild isActive className="text-primary"><Link href="/dashboard/tenant" aria-current="page"><LayoutGrid /> <span>Overview</span></Link></SidebarMenuButton></SidebarMenuItem>
-              <SidebarMenuItem><SidebarMenuButton disabled><ListChecks /> <span>My rental requests</span></SidebarMenuButton></SidebarMenuItem>
+              <SidebarMenuItem><SidebarMenuButton asChild isActive={active === "overview"} className={active === "overview" ? "text-primary" : undefined}><Link href="/dashboard/tenant" aria-current={active === "overview" ? "page" : undefined}><LayoutGrid /> <span>Overview</span></Link></SidebarMenuButton></SidebarMenuItem>
+              <SidebarMenuItem><SidebarMenuButton asChild isActive={active === "requests"} className={active === "requests" ? "text-primary" : undefined}><Link href="/dashboard/tenant/requests" aria-current={active === "requests" ? "page" : undefined}><ListChecks /> <span>My rental requests</span></Link></SidebarMenuButton></SidebarMenuItem>
               <SidebarMenuItem><SidebarMenuButton disabled><CreditCard /> <span>Payment history</span></SidebarMenuButton></SidebarMenuItem>
               <SidebarMenuItem><SidebarMenuButton disabled><UserRound /> <span>My profile</span></SidebarMenuButton></SidebarMenuItem>
             </SidebarMenu>
