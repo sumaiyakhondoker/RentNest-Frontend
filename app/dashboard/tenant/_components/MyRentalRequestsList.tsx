@@ -6,7 +6,6 @@ import {
   getMyRentalRequests,
   getRentalRequestById,
 } from "../_actions/getMyRentalRequests";
-import { createPayment } from "../_actions/createPayment";
 import RentalStatusBadge from "./RentalStatusBadge";
 
 function formatDate(value?: string | null) {
@@ -113,9 +112,11 @@ export default async function MyRentalRequestsList() {
                   </Link>
                 </Button>
                 {request.status === "APPROVED" && (
-                  <form action={createPayment.bind(null, request.id)}>
-                    <Button type="submit" size="sm">Pay Now</Button>
-                  </form>
+                  <Button asChild size="sm">
+                    <Link href={`/dashboard/tenant/requests/${request.id}/pay`}>
+                      Pay Now
+                    </Link>
+                  </Button>
                 )}
                 {request.status === "ACTIVE" && (
                   <Button size="sm" disabled title="Review form is coming soon">

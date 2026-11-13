@@ -1,7 +1,8 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import type { RentalRequest } from "@/lib/types";
-import { createPayment } from "../_actions/createPayment";
 import RentalStatusBadge from "./RentalStatusBadge";
 
 export default function RecentRentalRequests({
@@ -38,14 +39,14 @@ export default function RecentRentalRequests({
           </p>
         ) : (
           <div className="mt-6 overflow-x-auto">
-            <table className="w-full min-w-170 text-left text-sm">
+            <table className="w-full min-w-190 text-left text-sm">
               <thead className="bg-muted text-xs font-bold text-muted-foreground">
                 <tr>
                   <th className="rounded-l-lg px-4 py-4">PROPERTY</th>
                   <th className="px-3 py-4">REQUESTED</th>
                   <th className="px-3 py-4">RENT</th>
                   <th className="px-3 py-4">STATUS</th>
-                  <th className="rounded-r-lg px-3 py-4">ACTION</th>
+                  <th className="min-w-56 rounded-r-lg px-3 py-4">ACTION</th>
                 </tr>
               </thead>
               <tbody>
@@ -69,21 +70,38 @@ export default function RecentRentalRequests({
                       <RentalStatusBadge status={item.status} />
                     </td>
                     <td className="px-3 py-4">
-                      {item.status === "APPROVED" && (
-                        <form action={createPayment.bind(null, item.id)}>
-                          <Button type="submit" size="sm">Pay Now</Button>
-                        </form>
-                      )}
-                      {item.status === "ACTIVE" && (
-                        <Button size="sm" disabled title="Review form is coming soon">
-                          Leave Review
-                        </Button>
-                      )}
+                      <div className="flex items-center gap-3 whitespace-nowrap">
+                        <Link
+                          href={`/dashboard/tenant/requests/${item.id}`}
+                          className="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
+                        >
+                          View details <ArrowRight className="size-4" />
+                        </Link>
+                        {item.status === "APPROVED" && (
+                          <Button asChild size="sm">
+                            <Link href={`/dashboard/tenant/requests/${item.id}/pay`}>
+                              Pay Now
+                            </Link>
+                          </Button>
+                        )}
+                        {item.status === "ACTIVE" && (
+                          <Button size="sm" disabled title="Review form is coming soon">
+                            Leave Review
+                          </Button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <div className="mt-4 flex justify-end">
+              <Button asChild variant="link" className="px-0 text-primary">
+                <Link href="/dashboard/tenant/requests">
+                  View all requests <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
         )}
       </CardContent>

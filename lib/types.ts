@@ -82,6 +82,17 @@ export type PaymentsResponse = {
   data: Payment[];
 };
 
+export type PaymentDetails = Payment & {
+  transactionId: string | null;
+  paidAt: string | null;
+};
+
+export type PaymentDetailsResponse = {
+  success: boolean;
+  message: string;
+  data?: PaymentDetails;
+};
+
 export type CreatePaymentResponse = {
   success: boolean;
   message?: string;
