@@ -1,8 +1,8 @@
 import { getMe } from "@/service/getMe";
-import { getRentalRequestById } from "../../_actions/getMyRentalRequests";
-import RentalRequestDetails from "../../_components/RentalRequestDetails";
-import TenantDashboardHeader from "../../_components/TenantDashboardHeader";
-import TenantDashboardShell from "../../_components/TenantDashboardShell";
+import { getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
+import RentalRequestDetails from "@/app/dashboard/_components/tenant/requests/RentalRequestDetails";
+import TenantDashboardHeader from "@/app/dashboard/_components/tenant/shared/TenantDashboardHeader";
+import TenantDashboardShell from "@/app/dashboard/_components/tenant/shared/TenantDashboardShell";
 
 export default async function RentalRequestDetailsPage({
   params,

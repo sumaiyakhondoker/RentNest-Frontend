@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import type { RentalRequest } from "@/lib/types";
-import RentalStatusBadge from "./RentalStatusBadge";
+import RentalStatusBadge from "../../shared/RentalStatusBadge";
 
 export default function RecentRentalRequests({
   rentals,
@@ -46,7 +46,8 @@ export default function RecentRentalRequests({
                   <th className="px-3 py-4">REQUESTED</th>
                   <th className="px-3 py-4">RENT</th>
                   <th className="px-3 py-4">STATUS</th>
-                  <th className="min-w-56 rounded-r-lg px-3 py-4">ACTION</th>
+                  <th className="min-w-36 px-3 py-4">ACTION</th>
+                  <th scope="col" aria-label="Request details" className="min-w-36 rounded-r-lg px-3 py-4" />
                 </tr>
               </thead>
               <tbody>
@@ -69,27 +70,27 @@ export default function RecentRentalRequests({
                     <td className="px-3 py-4">
                       <RentalStatusBadge status={item.status} />
                     </td>
-                    <td className="px-3 py-4">
-                      <div className="flex items-center gap-3 whitespace-nowrap">
-                        <Link
-                          href={`/dashboard/tenant/requests/${item.id}`}
-                          className="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
-                        >
-                          View details <ArrowRight className="size-4" />
-                        </Link>
-                        {item.status === "APPROVED" && (
-                          <Button asChild size="sm">
-                            <Link href={`/dashboard/tenant/requests/${item.id}/pay`}>
-                              Pay Now
-                            </Link>
-                          </Button>
-                        )}
-                        {item.status === "ACTIVE" && (
-                          <Button size="sm" disabled title="Review form is coming soon">
-                            Leave Review
-                          </Button>
-                        )}
-                      </div>
+                    <td className="px-3 py-4 whitespace-nowrap">
+                      {item.status === "APPROVED" && (
+                        <Button asChild size="sm">
+                          <Link href={`/dashboard/tenant/requests/${item.id}/pay`}>
+                            Pay Now
+                          </Link>
+                        </Button>
+                      )}
+                      {item.status === "ACTIVE" && (
+                        <Button size="sm" disabled title="Review form is coming soon">
+                          Leave Review
+                        </Button>
+                      )}
+                    </td>
+                    <td className="px-3 py-4 text-right whitespace-nowrap">
+                      <Link
+                        href={`/dashboard/tenant/requests/${item.id}`}
+                        className="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
+                      >
+                        View details <ArrowRight className="size-4" />
+                      </Link>
                     </td>
                   </tr>
                 ))}

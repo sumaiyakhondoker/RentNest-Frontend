@@ -1,11 +1,11 @@
-import { getPaymentById } from "../_actions/getPaymentById";
-import PaymentCancelCard from "./_components/PaymentCancelCard";
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
+import { getPaymentById } from "@/app/(public)/_actions/payment/getPaymentById";
+import PaymentCancelCard from "@/app/(public)/_components/payment/PaymentCancelCard";
 
-export default async function PaymentCancelPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ paymentId?: string; rentalRequestId?: string }>;
-}) {
+type CancelSearchParams = Promise<{ paymentId?: string; rentalRequestId?: string }>;
+
+async function PaymentCancelContent({ searchParams }: { searchParams: CancelSearchParams }) {
   const { paymentId } = await searchParams;
   const result = paymentId ? await getPaymentById(paymentId) : null;
   const payment = result?.success ? result.data : undefined;
@@ -37,5 +37,24 @@ export default async function PaymentCancelPage({
         errorMessage={result && !result.success ? result.message : "Payment information was not provided."}
       />
     </div>
+  );
+}
+
+export default function PaymentCancelPage({
+  searchParams,
+}: {
+  searchParams: CancelSearchParams;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-96 items-center justify-center gap-3 text-primary" role="status">
+          <Loader className="size-6 animate-spin" aria-hidden="true" />
+          <span>Checking payment status...</span>
+        </div>
+      }
+    >
+      <PaymentCancelContent searchParams={searchParams} />
+    </Suspense>
   );
 }

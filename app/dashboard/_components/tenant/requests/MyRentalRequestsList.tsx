@@ -5,8 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   getMyRentalRequests,
   getRentalRequestById,
-} from "../_actions/getMyRentalRequests";
-import RentalStatusBadge from "./RentalStatusBadge";
+} from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
+import RentalStatusBadge from "../../shared/RentalStatusBadge";
 
 function formatDate(value?: string | null) {
   return value

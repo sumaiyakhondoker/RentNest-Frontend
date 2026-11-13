@@ -3,8 +3,8 @@ import { CreditCard } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getMyPayments } from "../_actions/getMyPayments";
-import { getRentalRequestById } from "../_actions/getMyRentalRequests";
+import { getMyPayments } from "@/app/dashboard/_actions/tenant/getMyPayments";
+import { getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
 
 export default async function PaymentHistoryList() {
   const result = await getMyPayments();

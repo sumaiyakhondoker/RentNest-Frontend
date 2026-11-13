@@ -67,6 +67,26 @@ export type RentalRequestsResponse = {
   data: { totalRentalRequests: number; allRentalRequests: RentalRequest[] };
 };
 
+export type LandlordRentalRequest = RentalRequest & {
+  tenantId: string;
+  tenant?: { name: string };
+};
+
+export type LandlordRequestsResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    totalRentalRequests: number;
+    allRentalRequests: LandlordRentalRequest[];
+  };
+};
+
+export type LandlordPropertiesResponse = {
+  success: boolean;
+  message: string;
+  data: Property[];
+};
+
 export type Payment = {
   id: string;
   rentalRequestId: string;

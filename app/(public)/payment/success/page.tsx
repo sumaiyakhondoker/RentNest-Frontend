@@ -1,12 +1,12 @@
-import { getPaymentById } from "../_actions/getPaymentById";
-import { getRentalRequestById } from "@/app/dashboard/tenant/_actions/getMyRentalRequests";
-import PaymentSuccessCard from "./_components/PaymentSuccessCard";
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
+import { getPaymentById } from "@/app/(public)/_actions/payment/getPaymentById";
+import { getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
+import PaymentSuccessCard from "@/app/(public)/_components/payment/PaymentSuccessCard";
 
-export default async function PaymentSuccessPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ paymentId?: string; session_id?: string }>;
-}) {
+type SuccessSearchParams = Promise<{ paymentId?: string; session_id?: string }>;
+
+async function PaymentSuccessContent({ searchParams }: { searchParams: SuccessSearchParams }) {
   const { paymentId, session_id: sessionId } = await searchParams;
   const result = paymentId ? await getPaymentById(paymentId) : null;
   const payment = result?.success ? result.data : undefined;
@@ -34,5 +34,24 @@ export default async function PaymentSuccessPage({
         errorMessage={result && !result.success ? result.message : undefined}
       />
     </div>
+  );
+}
+
+export default function PaymentSuccessPage({
+  searchParams,
+}: {
+  searchParams: SuccessSearchParams;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-96 items-center justify-center gap-3 text-primary" role="status">
+          <Loader className="size-6 animate-spin" aria-hidden="true" />
+          <span>Checking payment status...</span>
+        </div>
+      }
+    >
+      <PaymentSuccessContent searchParams={searchParams} />
+    </Suspense>
   );
 }

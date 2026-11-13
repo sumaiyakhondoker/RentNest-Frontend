@@ -1,8 +1,8 @@
-import { getMyProfile } from "../_actions/getMyProfile";
-import ProfileDetails from "../_components/ProfileDetails";
-import ProfileSummary from "../_components/ProfileSummary";
-import TenantDashboardHeader from "../_components/TenantDashboardHeader";
-import TenantDashboardShell from "../_components/TenantDashboardShell";
+import { getMyProfile } from "@/app/dashboard/_actions/tenant/getMyProfile";
+import ProfileDetails from "@/app/dashboard/_components/tenant/profile/ProfileDetails";
+import ProfileSummary from "@/app/dashboard/_components/tenant/profile/ProfileSummary";
+import TenantDashboardHeader from "@/app/dashboard/_components/tenant/shared/TenantDashboardHeader";
+import TenantDashboardShell from "@/app/dashboard/_components/tenant/shared/TenantDashboardShell";
 
 export default async function MyProfilePage() {
   const result = await getMyProfile();

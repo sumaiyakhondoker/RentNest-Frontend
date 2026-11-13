@@ -1,19 +1,47 @@
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
 import { getMe } from "@/service/getMe";
-import TenantDashboardHeader from "../_components/TenantDashboardHeader";
-import TenantDashboardShell from "../_components/TenantDashboardShell";
-import MyRentalRequestsList from "../_components/MyRentalRequestsList";
+import TenantDashboardHeader from "@/app/dashboard/_components/tenant/shared/TenantDashboardHeader";
+import TenantDashboardShell from "@/app/dashboard/_components/tenant/shared/TenantDashboardShell";
+import MyRentalRequestsList from "@/app/dashboard/_components/tenant/requests/MyRentalRequestsList";
 
-export default async function MyRentalRequestsPage() {
+async function MyRentalRequestsContent() {
   const user = await getMe();
   const name = user.success ? user.data?.profile?.name || "Tenant" : "Tenant";
 
-  return <TenantDashboardShell active="requests">
+  return (
     <div className="min-w-0 flex-1">
-      <TenantDashboardHeader name={name} title="My rental requests" description="Track your requests and landlord decisions" />
+      <TenantDashboardHeader
+        name={name}
+        title="My rental requests"
+        description="Track your requests and landlord decisions"
+      />
       <main className="mx-auto max-w-7xl space-y-6 px-5 py-8 sm:px-8 lg:px-10">
-        <div><h2 className="text-2xl font-bold">All requests</h2><p className="mt-1 text-sm text-muted-foreground">See the latest status of each rental request.</p></div>
+        <div>
+          <h2 className="text-2xl font-bold">All requests</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            See the latest status of each rental request.
+          </p>
+        </div>
         <MyRentalRequestsList />
       </main>
     </div>
-  </TenantDashboardShell>;
+  );
+}
+
+export default function MyRentalRequestsPage() {
+  return (
+    <TenantDashboardShell active="requests">
+      <Suspense
+        fallback={
+          <div className="flex min-h-96 min-w-0 flex-1 items-center justify-center gap-3 text-primary" role="status">
+            <Loader className="size-6 animate-spin" aria-hidden="true" />
+            <span>Loading rental requests...</span>
+          </div>
+        }
+      >
+        <MyRentalRequestsContent />
+      </Suspense>
+    </TenantDashboardShell>
+  );
 }

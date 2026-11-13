@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getMe } from "@/service/getMe";
-import { getMyRentalRequests, getRentalRequestById } from "../_actions/getMyRentalRequests";
-import { getMyPayments } from "../_actions/getMyPayments";
-import TenantDashboardHeader from "./TenantDashboardHeader";
+import { getMyRentalRequests, getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
+import { getMyPayments } from "@/app/dashboard/_actions/tenant/getMyPayments";
+import TenantDashboardHeader from "../shared/TenantDashboardHeader";
 import TenantMetrics from "./TenantMetrics";
 import RecentRentalRequests from "./RecentRentalRequests";
 import RecentPayment from "./RecentPayment";

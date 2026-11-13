@@ -3,10 +3,10 @@ import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getMe } from "@/service/getMe";
-import { createPayment } from "../../../_actions/createPayment";
-import { getRentalRequestById } from "../../../_actions/getMyRentalRequests";
-import TenantDashboardHeader from "../../../_components/TenantDashboardHeader";
-import TenantDashboardShell from "../../../_components/TenantDashboardShell";
+import { createPayment } from "@/app/dashboard/_actions/tenant/createPayment";
+import { getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
+import TenantDashboardHeader from "@/app/dashboard/_components/tenant/shared/TenantDashboardHeader";
+import TenantDashboardShell from "@/app/dashboard/_components/tenant/shared/TenantDashboardShell";
 
 export default async function PaymentInitiationPage({
   params,
@@ -36,7 +36,6 @@ export default async function PaymentInitiationPage({
           name={name}
           title="Complete rental payment"
           description="Review your approved request before checkout"
-          showSidebarTrigger={false}
           className="min-h-24.74"
         />
         <main className="mx-auto max-w-6xl space-y-6 px-5 py-8 sm:px-8 lg:px-10">

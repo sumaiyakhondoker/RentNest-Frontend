@@ -1,7 +1,7 @@
 import { getMe } from "@/service/getMe";
-import TenantDashboardHeader from "../_components/TenantDashboardHeader";
-import TenantDashboardShell from "../_components/TenantDashboardShell";
-import PaymentHistoryList from "../_components/PaymentHistoryList";
+import TenantDashboardHeader from "@/app/dashboard/_components/tenant/shared/TenantDashboardHeader";
+import TenantDashboardShell from "@/app/dashboard/_components/tenant/shared/TenantDashboardShell";
+import PaymentHistoryList from "@/app/dashboard/_components/tenant/payments/PaymentHistoryList";
 
 export default async function PaymentHistoryPage() {
   const user = await getMe();

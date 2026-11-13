@@ -1,16 +1,14 @@
-import { SidebarTrigger } from "@/components/ui/sidebar";
-
-export default function TenantDashboardHeader({
+export default function DashboardHeader({
   name,
-  title = "Tenant dashboard",
-  description = "Manage your rentals in one place",
-  showSidebarTrigger = true,
+  title,
+  description,
+  accountLabel,
   className = "",
 }: {
   name: string;
-  title?: string;
-  description?: string;
-  showSidebarTrigger?: boolean;
+  title: string;
+  description: string;
+  accountLabel: string;
   className?: string;
 }) {
   const initials = name
@@ -20,10 +18,10 @@ export default function TenantDashboardHeader({
     .map((part) => part[0])
     .join("")
     .toUpperCase();
+
   return (
     <header className={`flex items-center justify-between gap-4 border-b px-5 py-5 sm:px-8 lg:px-10 ${className}`}>
       <div className="flex items-center gap-3">
-        {showSidebarTrigger && <SidebarTrigger />}
         <div>
           <h1 className="text-xl font-bold">{title}</h1>
           <p className="text-xs text-muted-foreground">{description}</p>
@@ -31,7 +29,7 @@ export default function TenantDashboardHeader({
       </div>
       <div className="flex items-center gap-4">
         <span className="hidden text-[11px] font-semibold text-muted-foreground sm:block">
-          TENANT ACCOUNT
+          {accountLabel}
         </span>
         <span
           aria-label={name}

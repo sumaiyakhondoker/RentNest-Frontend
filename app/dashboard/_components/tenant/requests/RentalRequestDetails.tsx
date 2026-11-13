@@ -3,7 +3,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { RentalRequest } from "@/lib/types";
-import RentalStatusBadge from "./RentalStatusBadge";
+import RentalStatusBadge from "../../shared/RentalStatusBadge";
 
 function formatDate(value?: string | null) {
   return value
