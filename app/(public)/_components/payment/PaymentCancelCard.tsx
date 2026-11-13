@@ -18,7 +18,7 @@ export default function PaymentCancelCard({ payment, errorMessage }: Props) {
     !isCompleted;
 
   return (
-    <Card className="mx-auto mt-16 max-w-[725px] rounded-2xl shadow-none">
+    <Card className="mx-auto mt-16 max-w-181.25 rounded-2xl shadow-none">
       <CardContent className="p-7 sm:p-8">
         <div className="text-center">
           <div

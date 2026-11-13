@@ -46,8 +46,8 @@ export default function PaymentSuccessPage({
     <Suspense
       fallback={
         <div className="flex min-h-96 items-center justify-center gap-3 text-primary" role="status">
-          <Loader className="size-6 animate-spin" aria-hidden="true" />
-          <span>Checking payment status...</span>
+          <Loader size={55} className=" animate-spin"  />
+          
         </div>
       }
     >

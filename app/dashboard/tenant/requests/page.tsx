@@ -35,8 +35,7 @@ export default function MyRentalRequestsPage() {
       <Suspense
         fallback={
           <div className="flex min-h-96 min-w-0 flex-1 items-center justify-center gap-3 text-primary" role="status">
-            <Loader className="size-6 animate-spin" aria-hidden="true" />
-            <span>Loading rental requests...</span>
+            <Loader size={55} className=" animate-spin"  />
           </div>
         }
       >

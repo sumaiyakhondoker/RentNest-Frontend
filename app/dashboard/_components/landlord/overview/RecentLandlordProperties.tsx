@@ -4,19 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Property } from "@/lib/types";
-
-function propertyImage(picture: string | null) {
-  if (!picture) return "/property-placeholder.png";
-
-  try {
-    const url = new URL(picture);
-    if (url.protocol === "http:" || url.protocol === "https:") return picture;
-  } catch {
-    // Use the local placeholder when the picture is not a URL.
-  }
-
-  return "/property-placeholder.png";
-}
+import { propertyImage } from "@/app/dashboard/_components/landlord/propertyImage";
 
 export default function RecentLandlordProperties({
   properties,
@@ -42,9 +30,9 @@ export default function RecentLandlordProperties({
               Check availability across your rental portfolio.
             </p>
           </div>
-          <span className="text-sm font-semibold text-muted-foreground" title="Properties page is coming soon">
+          <Link href="/dashboard/landlord/properties" className="text-sm font-semibold text-primary hover:underline">
             View all properties <ArrowRight className="inline size-4" />
-          </span>
+          </Link>
         </div>
 
         {hasError ? (
@@ -78,13 +66,13 @@ export default function RecentLandlordProperties({
                   variant="secondary"
                   className={property.availability === "AVAILABLE" ? "min-w-24 bg-green-100 text-green-800" : "min-w-24 bg-gray-100 text-gray-700"}
                 >
-                  {property.availability === "AVAILABLE" ? "Available" : "Unavailable"}
+                  {property.availability === "AVAILABLE" ? "Available" : "Rented"}
                 </Badge>
                 <Link
-                  href={`/properties/${property.id}`}
-                  className="inline-flex min-w-16 items-center gap-1 text-xs font-semibold text-primary hover:underline"
+                  href={`/dashboard/landlord/properties?edit=${property.id}`}
+                  className="inline-flex min-w-20 items-center gap-1 text-xs font-semibold text-primary hover:underline"
                 >
-                  View <ArrowRight className="size-3" />
+                  Manage <ArrowRight className="size-3" />
                 </Link>
               </div>
             ))}

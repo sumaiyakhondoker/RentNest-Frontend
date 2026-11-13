@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getMe } from "@/service/getMe";
 import { getLandlordProperties } from "@/app/dashboard/_actions/landlord/getLandlordProperties";
@@ -46,8 +47,10 @@ export default async function LandlordDashboardContent() {
               Keep track of your properties and rental requests.
             </p>
           </div>
-          <Button disabled title="Create property page is coming soon" className="h-11 rounded-lg px-5">
-            <Plus className="size-4" /> Add property
+          <Button asChild className="h-11 rounded-lg px-5">
+            <Link href="/dashboard/landlord/properties?create=1">
+              <Plus className="size-4" /> Add property
+            </Link>
           </Button>
         </div>
 
