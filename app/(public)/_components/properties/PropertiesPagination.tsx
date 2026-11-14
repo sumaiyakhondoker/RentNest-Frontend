@@ -1,6 +1,11 @@
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { PropertiesQuery } from "../../_actions/getProperties";
 
 
@@ -34,41 +39,31 @@ export default function PropertiesPagination({
   }
 
   return (
-    <nav
+    <Pagination
       aria-label="Property pagination"
-      className="flex items-center justify-center gap-4 pt-6"
+      className="pt-6"
     >
-      <Button
-        variant="outline"
-        disabled={currentPage <= 1}
-        asChild={currentPage > 1}
-      >
-        {currentPage > 1 ? (
-          <Link href={getPageUrl(currentPage - 1)}>
-            Previous
-          </Link>
-        ) : (
-          <span>Previous</span>
-        )}
-      </Button>
-
-      <span className="text-sm text-muted-foreground">
-        Page {currentPage} of {totalPages}
-      </span>
-
-      <Button
-        variant="outline"
-        disabled={currentPage >= totalPages}
-        asChild={currentPage < totalPages}
-      >
-        {currentPage < totalPages ? (
-          <Link href={getPageUrl(currentPage + 1)}>
-            Next
-          </Link>
-        ) : (
-          <span>Next</span>
-        )}
-      </Button>
-    </nav>
+      <PaginationContent className="gap-4">
+        <PaginationItem>
+          <PaginationPrevious
+            href={currentPage > 1 ? getPageUrl(currentPage - 1) : "#"}
+            aria-disabled={currentPage <= 1}
+            tabIndex={currentPage <= 1 ? -1 : undefined}
+            className={currentPage <= 1 ? "pointer-events-none opacity-50" : undefined}
+          />
+        </PaginationItem>
+        <PaginationItem>
+          <span className="text-sm text-muted-foreground">Page {currentPage} of {totalPages}</span>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext
+            href={currentPage < totalPages ? getPageUrl(currentPage + 1) : "#"}
+            aria-disabled={currentPage >= totalPages}
+            tabIndex={currentPage >= totalPages ? -1 : undefined}
+            className={currentPage >= totalPages ? "pointer-events-none opacity-50" : undefined}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
   );
 }

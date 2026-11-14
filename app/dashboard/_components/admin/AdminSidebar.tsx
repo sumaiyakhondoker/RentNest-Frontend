@@ -2,7 +2,7 @@ import { Building2, LayoutGrid, ListChecks, Tags, UserRound, UsersRound } from "
 
 export const adminItems = [
   { label: "Overview", href: "/dashboard/admin", icon: LayoutGrid },
-  { label: "Users", href: "/dashboard/admin/users", icon: UsersRound, disabled: true },
+  { label: "Users", href: "/dashboard/admin/users", icon: UsersRound },
   { label: "Properties", href: "/dashboard/admin/properties", icon: Building2, disabled: true },
   { label: "Categories", href: "/dashboard/admin/categories", icon: Tags, disabled: true },
   { label: "Rental requests", href: "/dashboard/admin/requests", icon: ListChecks, disabled: true },
