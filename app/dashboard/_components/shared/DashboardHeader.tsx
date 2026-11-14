@@ -1,5 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { UserRound } from "lucide-react";
+import DashboardUserMenu from "./DashboardUserMenu";
 
 export default function DashboardHeader({
   name,
@@ -16,9 +15,6 @@ export default function DashboardHeader({
   accountLabel: string;
   className?: string;
 }) {
-  const imageUrl = profileImage?.trim();
-  const validImage = imageUrl?.startsWith("https://") || imageUrl?.startsWith("http://");
-
   return (
     <header className={`flex h-22 shrink-0 items-center justify-between gap-4 border-b px-5 py-0 sm:px-8 lg:px-10 ${className}`}>
       <div className="flex items-center gap-3">
@@ -31,12 +27,7 @@ export default function DashboardHeader({
         <span className="hidden text-[11px] font-semibold text-muted-foreground sm:block">
           {accountLabel}
         </span>
-        <Avatar className="size-11" aria-label={name}>
-          {validImage && <AvatarImage src={imageUrl} alt={name} />}
-          <AvatarFallback className="bg-primary/10 text-primary">
-            <UserRound className="size-5" />
-          </AvatarFallback>
-        </Avatar>
+        <DashboardUserMenu name={name} profileImage={profileImage} />
       </div>
     </header>
   );
