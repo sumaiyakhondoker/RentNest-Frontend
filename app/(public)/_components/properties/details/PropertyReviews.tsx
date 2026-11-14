@@ -1,5 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
+import { Star } from "lucide-react";
 import type { Review } from "@/lib/types";
 
 type Props = {
@@ -41,9 +42,7 @@ const PropertyReviews =({
 
         {totalReviews > 0 && (
           <div className="flex items-center gap-2">
-            <span className="text-xl text-amber-500">
-              ★
-            </span>
+            <Star className="size-5 fill-current text-amber-500" aria-hidden="true" />
 
             <span className="text-xl font-bold">
               {averageRating.toFixed(1)}
@@ -92,19 +91,20 @@ const PropertyReviews =({
                   </div>
 
                   <span
-                    className="text-sm tracking-wider text-amber-500"
+                    className="flex items-center gap-0.5"
                     aria-label={`${review.rating} out of 5 stars`}
                   >
-                    {"★".repeat(
-                      Math.max(0, Math.min(5, review.rating))
-                    )}
-                    {"☆".repeat(
-                      5 -
-                        Math.max(
-                          0,
-                          Math.min(5, review.rating)
-                        )
-                    )}
+                    {Array.from({ length: 5 }, (_, index) => (
+                      <Star
+                        key={index}
+                        aria-hidden="true"
+                        className={
+                          index < review.rating
+                            ? "size-4 fill-current text-amber-500"
+                            : "size-4 text-muted-foreground/40"
+                        }
+                      />
+                    ))}
                   </span>
                 </div>
 

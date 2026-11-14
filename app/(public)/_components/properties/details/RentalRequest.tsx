@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -97,7 +98,7 @@ const RentalRequest=({
             className="h-[53px] w-full rounded-[10px]"
           >
             <Link href={`/properties/${property.id}/request`}>
-              Request to rent →
+              Request to rent <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </Button>
         ) : (

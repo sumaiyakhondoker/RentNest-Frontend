@@ -2,14 +2,8 @@ import type { PropertyListResponse } from "@/lib/types";
 // get 6 property for home page
 export const getHomeProperties = async () => {
   const res = await fetch(
-    `${process.env.BACKEND_API_URL}/api/properties?limit=6&page=1`,{
-      cache: "no-cache",
-        next:{
-            revalidate: 60 * 60 * 6,
-            tags:["home-properties"]
-        }
-    }
-    
+    `${process.env.BACKEND_API_URL}/api/properties?limit=6&page=1`,
+    { cache: "no-store" },
   );
 
   const result = await res.json();
