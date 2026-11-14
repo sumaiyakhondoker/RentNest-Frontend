@@ -26,6 +26,7 @@ export default async function MyPropertiesContent({
     <div className="min-w-0 flex-1">
       <DashboardHeader
         name={name}
+        profileImage={user.success ? user.data?.profile?.profileImage : null}
         title="My properties"
         description=""
         accountLabel="LANDLORD"

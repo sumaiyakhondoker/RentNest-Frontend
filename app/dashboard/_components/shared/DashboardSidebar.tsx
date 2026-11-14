@@ -13,7 +13,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarSeparator,
 } from "@/components/ui/sidebar";
 
 export type DashboardMenuItem = {
@@ -39,7 +38,7 @@ export default function DashboardSidebar({
       collapsible="none"
       className="h-auto w-full shrink-0 border-b md:sticky md:top-0 md:h-svh md:w-(--sidebar-width) md:border-b-0 md:border-r"
     >
-      <SidebarHeader className="px-4 pt-5">
+      <SidebarHeader className="h-22 justify-center border-b border-sidebar-border px-4 py-0">
         <Link href="/" className="flex items-center">
           <Image src="/rentnest-logo.png" width={70} height={70} alt="RentNest logo" />
           <span className="text-2xl font-bold tracking-tight text-foreground">
@@ -47,7 +46,6 @@ export default function DashboardSidebar({
           </span>
         </Link>
       </SidebarHeader>
-      <SidebarSeparator />
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>{groupLabel}</SidebarGroupLabel>

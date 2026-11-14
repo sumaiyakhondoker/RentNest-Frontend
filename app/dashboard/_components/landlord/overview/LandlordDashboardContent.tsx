@@ -31,6 +31,7 @@ export default async function LandlordDashboardContent() {
     <div className="min-w-0 flex-1">
       <DashboardHeader
         name={name}
+        profileImage={user.success ? user.data?.profile?.profileImage : null}
         title="Landlord overview"
         description="Manage your rentals in one place"
         accountLabel="LANDLORD ACCOUNT"

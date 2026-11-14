@@ -6,6 +6,7 @@ import type { Property } from "@/lib/types";
 import type { Category } from "@/app/(public)/_actions/getProperties";
 import { propertyImage } from "@/app/dashboard/_components/landlord/propertyImage";
 import PropertyFormDialog from "./PropertyFormDialog";
+import DeletePropertyDialog from "./DeletePropertyDialog";
 
 export default function PropertyCard({
   property,
@@ -57,6 +58,7 @@ export default function PropertyCard({
       </CardContent>
       <CardFooter className="mt-auto justify-end gap-2 px-5 py-4">
         <PropertyFormDialog mode="edit" post={property} categories={categories} openOnLoad={openEdit} />
+        <DeletePropertyDialog propertyId={property.id} propertyTitle={property.title} />
       </CardFooter>
     </Card>
   );

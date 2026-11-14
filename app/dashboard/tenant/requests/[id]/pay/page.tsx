@@ -34,9 +34,9 @@ export default async function PaymentInitiationPage({
       <div className="min-w-0 flex-1">
         <TenantDashboardHeader
           name={name}
+          profileImage={user.success ? user.data?.profile?.profileImage : null}
           title="Complete rental payment"
           description="Review your approved request before checkout"
-          className="min-h-24.74"
         />
         <main className="mx-auto max-w-6xl space-y-6 px-5 py-8 sm:px-8 lg:px-10">
           <div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import type { LandlordRentalRequest, Property } from "@/lib/types";
@@ -26,12 +27,12 @@ export default function IncomingLandlordRequests({
               Recently submitted applications from tenants.
             </p>
           </div>
-          <span
-            title="Rental requests page is coming soon"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-muted-foreground"
+          <Link
+            href="/dashboard/landlord/requests"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
           >
             View all requests <ArrowRight className="size-4" />
-          </span>
+          </Link>
         </div>
 
         {hasError ? (

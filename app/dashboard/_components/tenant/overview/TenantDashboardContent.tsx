@@ -35,7 +35,7 @@ export default async function TenantDashboardContent() {
 
   return (
     <div className="min-w-0 flex-1">
-      <TenantDashboardHeader name={name} />
+      <TenantDashboardHeader name={name} profileImage={profileResult.success ? profileResult.data?.profile?.profileImage : null} />
       <main className="mx-auto max-w-7xl space-y-8 px-5 py-7 sm:px-8 lg:px-10">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>

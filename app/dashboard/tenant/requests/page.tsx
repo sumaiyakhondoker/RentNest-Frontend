@@ -13,6 +13,7 @@ async function MyRentalRequestsContent() {
     <div className="min-w-0 flex-1">
       <TenantDashboardHeader
         name={name}
+        profileImage={user.success ? user.data?.profile?.profileImage : null}
         title="My rental requests"
         description="Track your requests and landlord decisions"
       />
@@ -35,7 +36,7 @@ export default function MyRentalRequestsPage() {
       <Suspense
         fallback={
           <div className="flex min-h-96 min-w-0 flex-1 items-center justify-center gap-3 text-primary" role="status">
-            <Loader size={55} className=" animate-spin"  />
+            <Loader size={55} className="animate-spin" aria-hidden="true" />
           </div>
         }
       >

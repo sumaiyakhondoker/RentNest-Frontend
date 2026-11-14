@@ -49,7 +49,7 @@ export default function PaymentCancelPage({
     <Suspense
       fallback={
         <div className="flex min-h-96 items-center justify-center gap-3 text-primary" role="status">
-          <Loader size={55} className=" animate-spin"  />
+          <Loader size={55} className="animate-spin" aria-hidden="true" />
           
         </div>
       }

@@ -21,6 +21,7 @@ export default async function RentalRequestDetailsPage({
       <div className="min-w-0 flex-1">
         <TenantDashboardHeader
           name={name}
+          profileImage={user.success ? user.data?.profile?.profileImage : null}
           title="Rental request details"
           description="See the status and details of your request"
         />

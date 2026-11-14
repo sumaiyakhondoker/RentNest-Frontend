@@ -13,6 +13,7 @@ export default async function MyProfilePage() {
       <div className="min-w-0 flex-1">
         <TenantDashboardHeader
           name={profile?.name || "Tenant"}
+          profileImage={profile?.profileImage}
           title="My profile"
           description="Your RentNest account"
         />

@@ -12,6 +12,7 @@ export default async function PaymentHistoryPage() {
       <div className="min-w-0 flex-1">
         <TenantDashboardHeader
           name={name}
+          profileImage={user.success ? user.data?.profile?.profileImage : null}
           title="Payment history"
           description="See your rental payments in one place"
         />
