@@ -7,7 +7,7 @@ export const landlordItems = [
   { label: "My properties", href: "/dashboard/landlord/properties", icon: Building2 },
   { label: "Rental requests", href: "/dashboard/landlord/requests", icon: ListChecks },
   { label: "Rental history", href: "/dashboard/landlord/history", icon: Clock3 },
-  { label: "My profile", href: "/dashboard/landlord/profile", icon: UserRound, disabled: true },
+  { label: "My profile", href: "/dashboard/landlord/profile", icon: UserRound },
 ];
 
 export function LandlordSidebarFooter() {
