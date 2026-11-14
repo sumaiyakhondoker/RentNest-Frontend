@@ -76,7 +76,7 @@ export function Navbar({ user }: NavbarProps) {
     {
       label: "My Profile",
       icon: UserRound,
-      href: "/dashboard/profile",
+      href: dashboardPath ? `${dashboardPath}/profile` : "/auth/login",
     },
     {
       label: "Dashboard",

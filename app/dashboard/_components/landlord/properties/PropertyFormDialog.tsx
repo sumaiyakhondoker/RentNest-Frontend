@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useState, useTransition, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Pencil, Plus } from "lucide-react";
 import { toast } from "sonner";
@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import type { Property } from "@/lib/types";
 import type { Category } from "@/app/(public)/_actions/getProperties";
@@ -35,28 +36,39 @@ export default function PropertyFormDialog({
 }) {
   const router = useRouter();
   const [open, setOpen] = useState(openOnLoad);
+  const [available, setAvailable] = useState(post?.availability !== "RENTED");
+  const [error, setError] = useState("");
+  const [pending, startTransition] = useTransition();
   const isEdit = mode === "edit" && !!post;
-  const action = saveLandlordProperty.bind(null, isEdit ? "edit" : "create", post?.id);
-  const [state, formAction, pending] = useActionState(action, null);
 
   const handleOpenChange = (nextOpen: boolean) => {
+    if (nextOpen) {
+      setAvailable(post?.availability !== "RENTED");
+      setError("");
+    }
     setOpen(nextOpen);
     if (!nextOpen && openOnLoad) {
       router.replace("/dashboard/landlord/properties", { scroll: false });
     }
   };
 
-  useEffect(() => {
-    if (!state) return;
-    if (state.success) {
-      toast.success(state.message);
-      setOpen(false);
-      router.replace("/dashboard/landlord/properties", { scroll: false });
-      router.refresh();
-    } else {
-      toast.error(state.message);
-    }
-  }, [state, router]);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    setError("");
+    startTransition(async () => {
+      const result = await saveLandlordProperty(isEdit ? "edit" : "create", post?.id, null, formData);
+      if (result.success) {
+        toast.success(result.message);
+        setOpen(false);
+        router.replace("/dashboard/landlord/properties", { scroll: false });
+        router.refresh();
+      } else {
+        setError(result.message);
+        toast.error(result.message);
+      }
+    });
+  };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -67,18 +79,19 @@ export default function PropertyFormDialog({
           </Button>
         ) : (
           <Button className="h-11 rounded-lg px-5">
-            <Plus className="size-4" /> Add Property
+            <Plus className="size-4" /> Create listing
           </Button>
         )}
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-xl">
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Edit Property" : "Add Property"}</DialogTitle>
+          <DialogTitle>{isEdit ? "Edit listing" : "Create listing"}</DialogTitle>
           <DialogDescription>
-            {isEdit ? "Update your property details." : "Add a new property to your portfolio."}
+            {isEdit ? "Update your property listing." : "Add a new property to your listings."}
           </DialogDescription>
         </DialogHeader>
-        <form action={formAction} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <h3 className="text-sm font-semibold">Listing details</h3>
           <div className="space-y-2">
             <Label htmlFor={`${post?.id || "new"}-title`}>Property title</Label>
             <Input id={`${post?.id || "new"}-title`} name="title" defaultValue={post?.title || ""} required />
@@ -98,53 +111,65 @@ export default function PropertyFormDialog({
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor={`${post?.id || "new"}-picture`}>Picture URL (optional)</Label>
-            <Input id={`${post?.id || "new"}-picture`} name="picture" type="url" defaultValue={post?.picture || ""} placeholder="https://..." />
-          </div>
-          <div className="space-y-2">
             <Label htmlFor={`${post?.id || "new"}-amenities`}>Amenities (comma separated)</Label>
             <Input id={`${post?.id || "new"}-amenities`} name="amenities" defaultValue={post?.amenities?.join(", ") || ""} placeholder="Wi-Fi, Parking" required />
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor={`${post?.id || "new"}-category`}>Category</Label>
-              {categories.length > 0 ? (
-                <Select name="categoryId" defaultValue={post?.categoryId}>
-                  <SelectTrigger id={`${post?.id || "new"}-category`} className="w-full">
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>{category.categoryName}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              ) : post ? (
-                <Input value={post.categoryId} disabled aria-label="Current category" />
-              ) : (
-                <Input value="No categories available" disabled aria-label="Category unavailable" />
-              )}
-              {categories.length === 0 && post && <input type="hidden" name="categoryId" value={post.categoryId} />}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor={`${post?.id || "new"}-availability`}>Availability</Label>
-              <Select name="availability" defaultValue={post?.availability || "AVAILABLE"}>
-                <SelectTrigger id={`${post?.id || "new"}-availability`} className="w-full">
-                  <SelectValue />
+          <div className="space-y-2">
+            <Label htmlFor={`${post?.id || "new"}-category`}>Category</Label>
+            {categories.length > 0 ? (
+              <Select name="categoryId" defaultValue={post?.categoryId}>
+                <SelectTrigger id={`${post?.id || "new"}-category`} className="w-full">
+                  <SelectValue placeholder="Select category" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="AVAILABLE">Available</SelectItem>
-                  <SelectItem value="RENTED">Rented</SelectItem>
+                  {categories.map((category) => (
+                    <SelectItem key={category.id} value={category.id}>{category.categoryName}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
+            ) : post ? (
+              <Input value={post.categoryId} disabled aria-label="Current category" />
+            ) : (
+              <Input value="No categories available" disabled aria-label="Category unavailable" />
+            )}
+            {categories.length === 0 && post && <input type="hidden" name="categoryId" value={post.categoryId} />}
+          </div>
+
+          <div className="space-y-3 border-t pt-4">
+            <h3 className="text-sm font-semibold">Listing photo</h3>
+            <div className="space-y-2">
+              <Label htmlFor={`${post?.id || "new"}-picture`}>Image URL (optional)</Label>
+              <Input
+                id={`${post?.id || "new"}-picture`}
+                name="picture"
+                type="url"
+                defaultValue={post?.picture || ""}
+                placeholder="https://example.com/property.jpg"
+              />
             </div>
           </div>
+
+          <div className="flex items-center justify-between gap-4 border-t pt-4">
+            <div className="space-y-1">
+              <Label htmlFor={`${post?.id || "new"}-availability`}>Available for rent</Label>
+              <p className="text-xs text-muted-foreground">
+                {available ? "Tenants can see this listing as available." : "This listing is marked as rented."}
+              </p>
+            </div>
+            <input type="hidden" name="availability" value={available ? "AVAILABLE" : "RENTED"} />
+            <Switch
+              id={`${post?.id || "new"}-availability`}
+              checked={available}
+              onCheckedChange={setAvailable}
+              aria-label="Available for rent"
+            />
+          </div>
           {categories.length === 0 && !isEdit && <p className="text-sm text-destructive">Categories are unavailable. Refresh this page.</p>}
-          {state && !state.success && <p role="alert" className="text-sm text-destructive">{state.message}</p>}
+          {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => handleOpenChange(false)}>Cancel</Button>
             <Button type="submit" disabled={pending || (!isEdit && categories.length === 0)}>
-              {pending ? "Saving..." : isEdit ? "Save changes" : "Create property"}
+              {pending ? "Saving..." : isEdit ? "Save changes" : "Create listing"}
             </Button>
           </DialogFooter>
         </form>

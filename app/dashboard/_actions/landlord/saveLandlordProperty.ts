@@ -41,6 +41,16 @@ export async function saveLandlordProperty(
   if (availability !== "AVAILABLE" && availability !== "RENTED") {
     return { success: false, message: "Choose a valid availability status." };
   }
+  if (picture) {
+    try {
+      const imageUrl = new URL(picture);
+      if (imageUrl.protocol !== "http:" && imageUrl.protocol !== "https:") {
+        return { success: false, message: "Enter a valid image URL." };
+      }
+    } catch {
+      return { success: false, message: "Enter a valid image URL." };
+    }
+  }
 
   const url = mode === "edit"
     ? `${process.env.BACKEND_API_URL}/api/landlord/properties/${propertyId}`

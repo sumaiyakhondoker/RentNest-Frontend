@@ -1,11 +1,24 @@
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
+import DashboardShell from "@/app/dashboard/_components/shared/DashboardShell";
+import { adminItems, AdminSidebarFooter } from "@/app/dashboard/_components/admin/AdminSidebar";
+import AdminDashboardContent from "@/app/dashboard/_components/admin/overview/AdminDashboardContent";
 
-
-const AdminDashboardPage = () => {
-    return (
-        <div>
-            AdminDashboardPage
+export default function AdminDashboardPage() {
+  return (
+    <DashboardShell
+      items={adminItems}
+      activeHref="/dashboard/admin"
+      groupLabel="ADMIN WORKSPACE"
+      footer={<AdminSidebarFooter />}
+    >
+      <Suspense fallback={
+        <div className="flex min-h-96 min-w-0 flex-1 items-center justify-center text-primary" role="status">
+          <Loader size={55} className="animate-spin" aria-hidden="true" />
         </div>
-    );
-};
-
-export default AdminDashboardPage;
+      }>
+        <AdminDashboardContent />
+      </Suspense>
+    </DashboardShell>
+  );
+}

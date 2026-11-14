@@ -38,7 +38,7 @@ export default async function MyPropertiesContent({
             <p className="text-xs font-bold tracking-wide text-primary">PROPERTY MANAGEMENT</p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight">Your property listings</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              Review the properties in your portfolio.
+              Create and manage the properties in your portfolio.
             </p>
           </div>
           <PropertyFormDialog categories={categories} openOnLoad={query.create === "1"} />
@@ -50,7 +50,7 @@ export default async function MyPropertiesContent({
           </p>
         ) : properties.length === 0 ? (
           <p className="rounded-xl border p-8 text-center text-sm text-muted-foreground">
-            You have no properties yet. Use Add Property button to add one.
+            You have no properties yet. Use Create listing to add one.
           </p>
         ) : (
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">

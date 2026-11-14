@@ -1,12 +1,8 @@
 import { Suspense } from "react";
-import { LayoutGrid, Loader, UserRound } from "lucide-react";
+import { Loader } from "lucide-react";
 import DashboardShell from "@/app/dashboard/_components/shared/DashboardShell";
 import ProfileContent from "@/app/dashboard/_components/shared/profile/ProfileContent";
-
-const adminItems = [
-  { label: "Overview", href: "/dashboard/admin", icon: LayoutGrid, disabled: true },
-  { label: "My profile", href: "/dashboard/admin/profile", icon: UserRound },
-];
+import { adminItems, AdminSidebarFooter } from "@/app/dashboard/_components/admin/AdminSidebar";
 
 export default function AdminProfilePage() {
   return (
@@ -14,6 +10,7 @@ export default function AdminProfilePage() {
       items={adminItems}
       activeHref="/dashboard/admin/profile"
       groupLabel="ADMIN WORKSPACE"
+      footer={<AdminSidebarFooter />}
     >
       <Suspense fallback={
         <div className="flex min-h-96 min-w-0 flex-1 items-center justify-center text-primary" role="status">

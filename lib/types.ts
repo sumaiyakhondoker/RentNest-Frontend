@@ -137,3 +137,21 @@ export type MyProfileResponse = {
   data?: { profile: UserProfile };
 };
 
+export type AdminUsersResponse = {
+  success: boolean;
+  message: string;
+  data: { totalUsers: number; allUsers: UserProfile[] };
+};
+
+export type AdminPropertiesResponse = {
+  success: boolean;
+  message: string;
+  data: Property[];
+};
+
+export type AdminRentalsResponse = {
+  success: boolean;
+  message: string;
+  data: (RentalRequest & { tenantId: string })[];
+};
+
