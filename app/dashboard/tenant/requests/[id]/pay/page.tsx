@@ -2,11 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getMe } from "@/service/getMe";
 import { createPayment } from "@/app/dashboard/_actions/tenant/createPayment";
 import { getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
-import TenantDashboardHeader from "@/app/dashboard/_components/tenant/shared/TenantDashboardHeader";
-import TenantDashboardShell from "@/app/dashboard/_components/tenant/shared/TenantDashboardShell";
 
 export default async function PaymentInitiationPage({
   params,
@@ -16,11 +13,7 @@ export default async function PaymentInitiationPage({
   searchParams: Promise<{ error?: string }>;
 }) {
   const [{ id }, { error }] = await Promise.all([params, searchParams]);
-  const [user, request] = await Promise.all([
-    getMe(),
-    getRentalRequestById(id),
-  ]);
-  const name = user.success ? user.data?.profile?.name || "Tenant" : "Tenant";
+  const request = await getRentalRequestById(id);
   const amount = request?.property
     ? new Intl.NumberFormat("en-BD", {
         style: "currency",
@@ -30,14 +23,6 @@ export default async function PaymentInitiationPage({
     : null;
 
   return (
-    <TenantDashboardShell active="requests">
-      <div className="min-w-0 flex-1">
-        <TenantDashboardHeader
-          name={name}
-          profileImage={user.success ? user.data?.profile?.profileImage : null}
-          title="Complete rental payment"
-          description="Review your approved request before checkout"
-        />
         <main className="mx-auto max-w-6xl space-y-6 px-5 py-8 sm:px-8 lg:px-10">
           <div>
             <p className="text-xs font-semibold tracking-wide text-muted-foreground">
@@ -126,7 +111,5 @@ export default async function PaymentInitiationPage({
             </>
           )}
         </main>
-      </div>
-    </TenantDashboardShell>
   );
 }

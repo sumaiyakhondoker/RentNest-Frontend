@@ -3,7 +3,7 @@ import { Building2, LayoutGrid, ListChecks, Tags, UserRound, UsersRound } from "
 export const adminItems = [
   { label: "Overview", href: "/dashboard/admin", icon: LayoutGrid },
   { label: "Users", href: "/dashboard/admin/users", icon: UsersRound },
-  { label: "Properties", href: "/dashboard/admin/properties", icon: Building2, disabled: true },
+  { label: "Properties", href: "/dashboard/admin/properties", icon: Building2 },
   { label: "Categories", href: "/dashboard/admin/categories", icon: Tags, disabled: true },
   { label: "Rental requests", href: "/dashboard/admin/requests", icon: ListChecks, disabled: true },
   { label: "My profile", href: "/dashboard/admin/profile", icon: UserRound },

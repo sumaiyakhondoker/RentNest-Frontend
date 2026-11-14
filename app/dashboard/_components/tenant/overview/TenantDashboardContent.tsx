@@ -3,11 +3,9 @@ import { Button } from "@/components/ui/button";
 import { getMe } from "@/service/getMe";
 import { getMyRentalRequests, getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
 import { getMyPayments } from "@/app/dashboard/_actions/tenant/getMyPayments";
-import TenantDashboardHeader from "../shared/TenantDashboardHeader";
 import TenantMetrics from "./TenantMetrics";
 import RecentRentalRequests from "./RecentRentalRequests";
 import RecentPayment from "./RecentPayment";
-import RentalSteps from "./RentalSteps";
 
 export default async function TenantDashboardContent() {
   const [profileResult, rentalsResult, paymentsResult] = await Promise.all([
@@ -35,7 +33,6 @@ export default async function TenantDashboardContent() {
 
   return (
     <div className="min-w-0 flex-1">
-      <TenantDashboardHeader name={name} profileImage={profileResult.success ? profileResult.data?.profile?.profileImage : null} />
       <main className="mx-auto max-w-7xl space-y-8 px-5 py-7 sm:px-8 lg:px-10">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -50,10 +47,7 @@ export default async function TenantDashboardContent() {
 
         <TenantMetrics rentals={rentals} payments={payments} />
         <RecentRentalRequests rentals={requestDetails} hasError={!rentalsResult.success} />
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)]">
-          <RecentPayment payment={recentPayment} property={paymentProperty} hasError={!paymentsResult.success} />
-          <RentalSteps />
-        </div>
+        <RecentPayment payment={recentPayment} property={paymentProperty} hasError={!paymentsResult.success} />
       </main>
     </div>
   );

@@ -1,9 +1,4 @@
-import { getMe } from "@/service/getMe";
-
-
-
-const DashboardLayout =async ({ children }: LayoutProps<"/dashboard">) => {
-    const user = await getMe()
+const DashboardLayout = ({ children }: LayoutProps<"/dashboard">) => {
     return (
         <div>
             {children}

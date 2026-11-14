@@ -11,9 +11,8 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import DashboardSidebarLink from "./DashboardSidebarLink";
 
 export type DashboardMenuItem = {
   label: string;
@@ -24,12 +23,10 @@ export type DashboardMenuItem = {
 
 export default function DashboardSidebar({
   items,
-  activeHref,
   groupLabel,
   footer,
 }: {
   items: DashboardMenuItem[];
-  activeHref: string;
   groupLabel: string;
   footer?: ReactNode;
 }) {
@@ -53,26 +50,14 @@ export default function DashboardSidebar({
             <SidebarMenu>
               {items.map((item) => {
                 const Icon = item.icon;
-                const isActive = activeHref === item.href;
-
                 return (
-                  <SidebarMenuItem key={item.href}>
-                    {item.disabled ? (
-                      <SidebarMenuButton disabled title="Page coming soon">
-                        <Icon /> <span>{item.label}</span>
-                      </SidebarMenuButton>
-                    ) : (
-                      <SidebarMenuButton
-                        asChild
-                        isActive={isActive}
-                        className={isActive ? "text-primary" : undefined}
-                      >
-                        <Link href={item.href} aria-current={isActive ? "page" : undefined}>
-                          <Icon /> <span>{item.label}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    )}
-                  </SidebarMenuItem>
+                  <DashboardSidebarLink
+                    key={item.href}
+                    href={item.href}
+                    label={item.label}
+                    icon={<Icon />}
+                    disabled={item.disabled}
+                  />
                 );
               })}
             </SidebarMenu>

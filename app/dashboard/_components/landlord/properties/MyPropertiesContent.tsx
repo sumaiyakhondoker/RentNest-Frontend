@@ -1,7 +1,6 @@
 import { getMe } from "@/service/getMe";
 import { getAllCategories } from "@/app/(public)/_actions/getProperties";
 import { getLandlordProperties } from "@/app/dashboard/_actions/landlord/getLandlordProperties";
-import DashboardHeader from "@/app/dashboard/_components/shared/DashboardHeader";
 import PropertyCard from "./PropertyCard";
 import PropertyFormDialog from "./PropertyFormDialog";
 
@@ -12,7 +11,6 @@ export default async function MyPropertiesContent({
 }) {
   const query = await searchParams;
   const user = await getMe();
-  const name = user.success ? user.data?.profile?.name || "Landlord" : "Landlord";
   const landlordId = user.success ? user.data?.profile?.id || "" : "";
   const [result, categories] = await Promise.all([
     getLandlordProperties(landlordId),
@@ -24,14 +22,6 @@ export default async function MyPropertiesContent({
 
   return (
     <div className="min-w-0 flex-1">
-      <DashboardHeader
-        name={name}
-        profileImage={user.success ? user.data?.profile?.profileImage : null}
-        title="My properties"
-        description=""
-        accountLabel="LANDLORD"
-        className="min-h-22"
-      />
       <main className="mx-auto max-w-7xl space-y-6 px-5 py-8 sm:px-8 lg:px-10">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>

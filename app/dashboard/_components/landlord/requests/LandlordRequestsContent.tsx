@@ -1,12 +1,10 @@
 import { getMe } from "@/service/getMe";
 import { getLandlordProperties } from "@/app/dashboard/_actions/landlord/getLandlordProperties";
 import { getLandlordRequests } from "@/app/dashboard/_actions/landlord/getLandlordRequests";
-import DashboardHeader from "@/app/dashboard/_components/shared/DashboardHeader";
 import PendingRequestCard from "./PendingRequestCard";
 
 export default async function LandlordRequestsContent() {
   const user = await getMe();
-  const name = user.success ? user.data?.profile?.name || "Landlord" : "Landlord";
   const landlordId = user.success ? user.data?.profile?.id || "" : "";
   const [requestsResult, propertiesResult] = await Promise.all([
     getLandlordRequests(),
@@ -21,7 +19,6 @@ export default async function LandlordRequestsContent() {
 
   return (
     <div className="min-w-0 flex-1">
-      <DashboardHeader name={name} profileImage={user.success ? user.data?.profile?.profileImage : null} title="Rental requests" description="" accountLabel="LANDLORD" className="min-h-22" />
       <main className="mx-auto max-w-7xl space-y-6 px-5 py-8 sm:px-8 lg:px-10">
         <div>
           <p className="text-xs font-bold tracking-wide text-primary">INCOMING INQUIRIES</p>
