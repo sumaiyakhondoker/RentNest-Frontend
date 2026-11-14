@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Loader } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 import { getMe } from "@/service/getMe";
 import TenantDashboardHeader from "@/app/dashboard/_components/tenant/shared/TenantDashboardHeader";
 import TenantDashboardShell from "@/app/dashboard/_components/tenant/shared/TenantDashboardShell";
@@ -36,7 +36,7 @@ export default function MyRentalRequestsPage() {
       <Suspense
         fallback={
           <div className="flex min-h-96 min-w-0 flex-1 items-center justify-center gap-3 text-primary" role="status">
-            <Loader size={55} className="animate-spin" aria-hidden="true" />
+          <Spinner className="size-[55px]" />
           </div>
         }
       >

@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function RentalSteps() {
   return (
@@ -12,9 +13,9 @@ export default function RentalSteps() {
             "Pay securely once approved",
           ].map((step, index) => (
             <li key={step} className="flex items-center gap-3">
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-accent text-xs font-bold text-primary">
+              <Badge variant="secondary" className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-accent p-0 text-xs font-bold text-primary">
                 0{index + 1}
-              </span>
+              </Badge>
               {step}
             </li>
           ))}

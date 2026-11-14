@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import RentalStatusBadge from "@/app/dashboard/_components/shared/RentalStatusBadge";
 import type { LandlordRentalRequest, Property } from "@/lib/types";
@@ -23,9 +24,9 @@ export default function PendingRequestCard({
       <CardContent className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-4">
-            <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-primary">
-              {initials}
-            </span>
+            <Avatar className="size-12 shrink-0">
+              <AvatarFallback className="bg-accent text-sm font-bold text-primary">{initials}</AvatarFallback>
+            </Avatar>
             <div>
               <h2 className="text-lg font-semibold">{tenantName}</h2>
               <p className="mt-1 text-xs text-muted-foreground">Received {received}</p>

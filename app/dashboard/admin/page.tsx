@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Loader } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 import DashboardShell from "@/app/dashboard/_components/shared/DashboardShell";
 import { adminItems, AdminSidebarFooter } from "@/app/dashboard/_components/admin/AdminSidebar";
 import AdminDashboardContent from "@/app/dashboard/_components/admin/overview/AdminDashboardContent";
@@ -14,7 +14,7 @@ export default function AdminDashboardPage() {
     >
       <Suspense fallback={
         <div className="flex min-h-96 min-w-0 flex-1 items-center justify-center text-primary" role="status">
-          <Loader size={55} className="animate-spin" aria-hidden="true" />
+          <Spinner className="size-[55px]" />
         </div>
       }>
         <AdminDashboardContent />

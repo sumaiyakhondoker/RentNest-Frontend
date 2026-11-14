@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 import {
   loginSchema,
   type LoginFormValues,
@@ -14,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { loginAction } from "../_actions/authActions";
 import { toast } from "sonner";
 import { useState } from "react";
-import { Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -113,7 +114,7 @@ const LoginForm = () => {
               >
                 {isSubmitting ?(
           <>
-            <LoaderCircle className="animate-spin" />
+            <Spinner />
             Logging in...
           </>
         ) : (

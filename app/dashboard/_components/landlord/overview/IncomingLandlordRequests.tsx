@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { LandlordRentalRequest, Property } from "@/lib/types";
 import RentalStatusBadge from "@/app/dashboard/_components/shared/RentalStatusBadge";
 
@@ -45,32 +46,32 @@ export default function IncomingLandlordRequests({
           </p>
         ) : (
           <div className="mt-5 overflow-x-auto">
-            <table className="w-full min-w-160 text-left text-sm">
-              <thead className="bg-muted text-xs font-bold text-muted-foreground">
-                <tr>
-                  <th className="rounded-l-lg px-4 py-3">TENANT</th>
-                  <th className="px-3 py-3">PROPERTY</th>
-                  <th className="px-3 py-3">REQUESTED</th>
-                  <th className="rounded-r-lg px-3 py-3">STATUS</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table className="min-w-160 text-left">
+              <TableHeader className="bg-muted text-xs font-bold text-muted-foreground">
+                <TableRow>
+                  <TableHead className="rounded-l-lg px-4 py-3">TENANT</TableHead>
+                  <TableHead className="px-3 py-3">PROPERTY</TableHead>
+                  <TableHead className="px-3 py-3">REQUESTED</TableHead>
+                  <TableHead className="rounded-r-lg px-3 py-3">STATUS</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {requests.map((request) => (
-                  <tr key={request.id} className="border-b last:border-b-0">
-                    <td className="px-4 py-4 font-semibold" title={request.tenant?.name || request.tenantId}>
+                  <TableRow key={request.id} className="border-b last:border-b-0">
+                    <TableCell className="px-4 py-4 font-semibold" title={request.tenant?.name || request.tenantId}>
                       {request.tenant?.name || `Tenant ${request.tenantId.slice(0, 8)}`}
-                    </td>
-                    <td className="px-3 py-4 text-muted-foreground">
+                    </TableCell>
+                    <TableCell className="px-3 py-4 text-muted-foreground">
                       {propertyNames.get(request.propertyId) || "Property unavailable"}
-                    </td>
-                    <td className="px-3 py-4 text-muted-foreground">{date(request.createdAt)}</td>
-                    <td className="px-3 py-4">
+                    </TableCell>
+                    <TableCell className="px-3 py-4 text-muted-foreground">{date(request.createdAt)}</TableCell>
+                    <TableCell className="px-3 py-4">
                       <RentalStatusBadge status={request.status} />
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         )}
       </CardContent>

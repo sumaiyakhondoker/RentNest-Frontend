@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Select,
@@ -127,12 +128,12 @@ export default function PropertySearchBar({
         >
           {/* Location */}
           <div className="flex h-20 flex-col justify-center px-4">
-            <label
+            <Label
               htmlFor="location"
               className="mb-2 text-[11px] font-semibold uppercase text-muted-foreground"
             >
               Location
-            </label>
+            </Label>
 
             <Input
               id="location"
@@ -151,12 +152,12 @@ export default function PropertySearchBar({
 
           {/* Property Type */}
           <div className="flex h-20 flex-col justify-center border-border px-4 lg:border-l">
-            <label
+            <Label
               id="category-label"
               className="mb-2 text-[11px] font-semibold uppercase text-muted-foreground"
             >
               Property Type
-            </label>
+            </Label>
 
             <Controller
               name="category"
@@ -204,12 +205,12 @@ export default function PropertySearchBar({
 
           {/* Price Range */}
           <div className="flex h-20 flex-col justify-center border-border px-4 lg:border-l">
-            <label
+            <Label
               id="price-label"
               className="mb-2 text-[11px] font-semibold uppercase text-muted-foreground"
             >
               Price Range
-            </label>
+            </Label>
 
             <Controller
               name="priceRange"

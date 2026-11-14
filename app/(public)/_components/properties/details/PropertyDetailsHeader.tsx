@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import type { PropertyDetails } from "@/lib/types";
 import { MapPin } from "lucide-react";
@@ -13,19 +14,25 @@ type Props = {
 
   return (
     <section className="space-y-6">
-      <nav className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase text-muted-foreground">
-        <Link href="/" className="hover:text-primary">
-          Home
-        </Link>
-        <span>/</span>
-        <Link href="/properties" className="hover:text-primary">
-          Explore Properties
-        </Link>
-        <span>/</span>
-        <span className="text-foreground">
-          Property Details
-        </span>
-      </nav>
+      <Breadcrumb>
+        <BreadcrumbList className="gap-3 text-xs font-medium uppercase">
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild className="hover:text-primary">
+              <Link href="/">Home</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>/</BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild className="hover:text-primary">
+              <Link href="/properties">Explore Properties</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>/</BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbPage>Property Details</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
       <div className="space-y-3">
         <h1 className="text-3xl font-bold tracking-tight md:text-[37px]">

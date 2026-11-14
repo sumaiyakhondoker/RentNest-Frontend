@@ -14,6 +14,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { UserProfile } from "@/lib/types";
 import UserStatusButton from "./UserStatusButton";
 
@@ -89,22 +90,22 @@ export default function UserTable({ users, hasError }: { users: UserProfile[]; h
             </p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-160 text-left text-sm">
-                <thead className="bg-muted text-xs font-bold text-muted-foreground">
-                  <tr>
-                    <th className="rounded-l-lg px-4 py-3">USER</th>
-                    <th className="px-3 py-3">ROLE</th>
-                    <th className="px-3 py-3">STATUS</th>
-                    <th className="rounded-r-lg px-3 py-3">ACTION</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table className="min-w-160 text-left">
+                <TableHeader className="bg-muted text-xs font-bold text-muted-foreground">
+                  <TableRow>
+                    <TableHead className="rounded-l-lg px-4 py-3">USER</TableHead>
+                    <TableHead className="px-3 py-3">ROLE</TableHead>
+                    <TableHead className="px-3 py-3">STATUS</TableHead>
+                    <TableHead className="rounded-r-lg px-3 py-3">ACTION</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {pageUsers.map((user) => {
                     const imageUrl = user.profileImage?.trim();
                     const validImage = imageUrl?.startsWith("https://") || imageUrl?.startsWith("http://");
                     return (
-                      <tr key={user.id} className="border-b last:border-b-0">
-                        <td className="px-4 py-4">
+                      <TableRow key={user.id} className="border-b last:border-b-0">
+                        <TableCell className="px-4 py-4">
                           <div className="flex items-center gap-3">
                             <Avatar className="size-10">
                               {validImage && <AvatarImage src={imageUrl} alt={user.name} />}
@@ -117,21 +118,21 @@ export default function UserTable({ users, hasError }: { users: UserProfile[]; h
                               <p className="break-all text-xs text-muted-foreground">{user.email}</p>
                             </div>
                           </div>
-                        </td>
-                        <td className="px-3 py-4 capitalize">{user.role.toLowerCase()}</td>
-                        <td className="px-3 py-4">
+                        </TableCell>
+                        <TableCell className="px-3 py-4 capitalize">{user.role.toLowerCase()}</TableCell>
+                        <TableCell className="px-3 py-4">
                           <Badge variant="secondary" className={user.accountStatus === "ACTIVE"
                             ? "bg-green-100 text-green-800"
                             : "bg-red-100 text-red-800"}>
                             {user.accountStatus === "ACTIVE" ? "Active" : "Banned"}
                           </Badge>
-                        </td>
-                        <td className="px-3 py-4"><UserStatusButton user={user} /></td>
-                      </tr>
+                        </TableCell>
+                        <TableCell className="px-3 py-4"><UserStatusButton user={user} /></TableCell>
+                      </TableRow>
                     );
                   })}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           )}
           {!hasError && filteredUsers.length > 0 && (

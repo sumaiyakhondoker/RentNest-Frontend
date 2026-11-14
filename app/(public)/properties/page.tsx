@@ -1,6 +1,7 @@
 
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import PropertiesSkeleton from "../_components/properties/PropertiesSkeleton";
 
@@ -68,8 +69,8 @@ export default async function PropertiesPage({
             fallback={
               <div className="space-y-8">
                 <div className="space-y-2">
-                  <div className="h-8 w-56 animate-pulse rounded bg-muted" />
-                  <div className="h-4 w-72 animate-pulse rounded bg-muted" />
+                  <Skeleton className="h-8 w-56" />
+                  <Skeleton className="h-4 w-72" />
                 </div>
 
                 <PropertiesSkeleton />

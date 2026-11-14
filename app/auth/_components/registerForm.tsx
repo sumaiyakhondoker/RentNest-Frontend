@@ -3,14 +3,16 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 import {
   registerSchema,
   type RegisterFormValues,
 } from "@/lib/validations/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { registerAction } from "../_actions/authActions";
 
@@ -18,6 +20,7 @@ const RegisterForm=()=> {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -140,15 +143,27 @@ const RegisterForm=()=> {
 
       <div className="space-y-2">
         <Label htmlFor="role">Account type *</Label>
-        <select
-          id="role"
-          aria-invalid={!!errors.role}
-          className="h-10 w-full rounded-4xl border border-input bg-input/30 px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive"
-          {...register("role")}
-        >
-          <option value="TENANT">Tenant — I'm looking for a home</option>
-          <option value="LANDLORD">Landlord — I want to list a property</option>
-        </select>
+        <Controller
+          name="role"
+          control={control}
+          render={({ field }) => (
+            <Select name={field.name} value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger
+                id="role"
+                ref={field.ref}
+                onBlur={field.onBlur}
+                aria-invalid={!!errors.role}
+                className="h-10 w-full"
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="TENANT">Tenant — I&apos;m looking for a home</SelectItem>
+                <SelectItem value="LANDLORD">Landlord — I want to list a property</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
         {errors.role && (
           <p role="alert" className="text-sm text-destructive">
             {errors.role.message}
@@ -196,7 +211,7 @@ const RegisterForm=()=> {
       >
         {isSubmitting ? (
           <>
-            <LoaderCircle className="animate-spin" />
+            <Spinner />
             Creating account...
           </>
         ) : (

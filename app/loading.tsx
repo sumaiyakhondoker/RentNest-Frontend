@@ -1,9 +1,9 @@
-import { Loader } from 'lucide-react';
+import { Spinner } from "@/components/ui/spinner";
 
 const Loading = () => {
     return (
         <div className='w-full min-h-screen flex justify-center items-center text-primary'>
-           <Loader size={55} className="animate-spin" aria-hidden="true" />
+           <Spinner className="size-[55px]" />
         </div>
     );
 };

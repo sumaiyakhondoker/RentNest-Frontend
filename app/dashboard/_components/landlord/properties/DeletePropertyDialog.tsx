@@ -6,14 +6,16 @@ import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { deleteLandlordProperty } from "@/app/dashboard/_actions/landlord/deleteLandlordProperty";
 
 export default function DeletePropertyDialog({
@@ -41,28 +43,28 @@ export default function DeletePropertyDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger asChild>
         <Button variant="destructive" size="sm" className="rounded-lg">
           <Trash2 className="size-4" /> Delete
         </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Delete property?</DialogTitle>
-          <DialogDescription>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete property?</AlertDialogTitle>
+          <AlertDialogDescription>
             Are you sure you want to delete &quot;{propertyTitle}&quot;? This cannot be undone.
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setOpen(false)} disabled={pending}>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel disabled={pending}>
             Cancel
-          </Button>
-          <Button variant="destructive" onClick={handleDelete} disabled={pending}>
+          </AlertDialogCancel>
+          <AlertDialogAction variant="destructive" onClick={(event) => { event.preventDefault(); handleDelete(); }} disabled={pending}>
             {pending ? "Deleting..." : "Delete property"}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

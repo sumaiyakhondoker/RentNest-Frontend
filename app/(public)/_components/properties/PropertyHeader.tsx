@@ -1,24 +1,23 @@
 
 import Link from "next/link";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
  const PropertyHeader =()=> {
   return (
     <section className="space-y-5">
-      <nav aria-label="Breadcrumb">
-        <ol className="flex items-center gap-4 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          <li>
-            <Link href="/" className="hover:text-primary">
-              Home
-            </Link>
-          </li>
-
-          <li aria-hidden="true">/</li>
-
-          <li aria-current="page">
-            Explore Properties
-          </li>
-        </ol>
-      </nav>
+      <Breadcrumb>
+        <BreadcrumbList className="gap-4 text-xs font-semibold uppercase tracking-wide">
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild className="hover:text-primary">
+              <Link href="/">Home</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>/</BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbPage>Explore Properties</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight md:text-[34px]">

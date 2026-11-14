@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Loader } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 import { getPaymentById } from "@/app/(public)/_actions/payment/getPaymentById";
 import PaymentCancelCard from "@/app/(public)/_components/payment/PaymentCancelCard";
 
@@ -49,7 +49,7 @@ export default function PaymentCancelPage({
     <Suspense
       fallback={
         <div className="flex min-h-96 items-center justify-center gap-3 text-primary" role="status">
-          <Loader size={55} className="animate-spin" aria-hidden="true" />
+          <Spinner className="size-[55px]" />
           
         </div>
       }

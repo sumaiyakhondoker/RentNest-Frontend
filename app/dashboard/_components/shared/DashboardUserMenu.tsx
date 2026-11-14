@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { LogOut, UserRound } from "lucide-react";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,14 +44,14 @@ export default function DashboardUserMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button type="button" aria-label="Open user menu" className="cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-primary">
+        <Button type="button" variant="ghost" size="icon-lg" aria-label="Open user menu" className="size-11 rounded-full p-0">
           <Avatar className="size-11" aria-label={name}>
             {validImage && <AvatarImage src={imageUrl} alt={name} />}
             <AvatarFallback className="bg-primary/10 text-primary">
               <UserRound className="size-5" />
             </AvatarFallback>
           </Avatar>
-        </button>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>

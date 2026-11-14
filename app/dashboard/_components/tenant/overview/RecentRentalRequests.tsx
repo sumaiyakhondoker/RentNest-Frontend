@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { RentalRequest } from "@/lib/types";
 import RentalStatusBadge from "../../shared/RentalStatusBadge";
 
@@ -39,38 +40,38 @@ export default function RecentRentalRequests({
           </p>
         ) : (
           <div className="mt-6 overflow-x-auto">
-            <table className="w-full min-w-190 text-left text-sm">
-              <thead className="bg-muted text-xs font-bold text-muted-foreground">
-                <tr>
-                  <th className="rounded-l-lg px-4 py-4">PROPERTY</th>
-                  <th className="px-3 py-4">REQUESTED</th>
-                  <th className="px-3 py-4">RENT</th>
-                  <th className="px-3 py-4">STATUS</th>
-                  <th className="min-w-36 px-3 py-4">ACTION</th>
-                  <th scope="col" aria-label="Request details" className="min-w-36 rounded-r-lg px-3 py-4" />
-                </tr>
-              </thead>
-              <tbody>
+            <Table className="min-w-190 text-left">
+              <TableHeader className="bg-muted text-xs font-bold text-muted-foreground">
+                <TableRow>
+                  <TableHead className="rounded-l-lg px-4 py-4">PROPERTY</TableHead>
+                  <TableHead className="px-3 py-4">REQUESTED</TableHead>
+                  <TableHead className="px-3 py-4">RENT</TableHead>
+                  <TableHead className="px-3 py-4">STATUS</TableHead>
+                  <TableHead className="min-w-36 px-3 py-4">ACTION</TableHead>
+                  <TableHead scope="col" aria-label="Request details" className="min-w-36 rounded-r-lg px-3 py-4" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {rentals.map((item) => (
-                  <tr key={item.id} className="border-b last:border-b-0">
-                    <td className="px-4 py-4">
+                  <TableRow key={item.id} className="border-b last:border-b-0">
+                    <TableCell className="px-4 py-4">
                       <span className="block font-semibold">
                         {item.property?.title || "Property unavailable"}
                       </span>
                       <span className="text-xs text-muted-foreground">
                         {item.property?.location || item.propertyId}
                       </span>
-                    </td>
-                    <td className="px-3 py-4 text-muted-foreground">
+                    </TableCell>
+                    <TableCell className="px-3 py-4 text-muted-foreground">
                       {date(item.createdAt)}
-                    </td>
-                    <td className="px-3 py-4 font-semibold">
+                    </TableCell>
+                    <TableCell className="px-3 py-4 font-semibold">
                       {item.property ? money(item.property.price) : "—"}
-                    </td>
-                    <td className="px-3 py-4">
+                    </TableCell>
+                    <TableCell className="px-3 py-4">
                       <RentalStatusBadge status={item.status} />
-                    </td>
-                    <td className="px-3 py-4 whitespace-nowrap">
+                    </TableCell>
+                    <TableCell className="px-3 py-4 whitespace-nowrap">
                       {item.status === "APPROVED" && (
                         <Button asChild size="sm">
                           <Link href={`/dashboard/tenant/requests/${item.id}/pay`}>
@@ -83,19 +84,19 @@ export default function RecentRentalRequests({
                           Leave Review
                         </Button>
                       )}
-                    </td>
-                    <td className="px-3 py-4 text-right whitespace-nowrap">
+                    </TableCell>
+                    <TableCell className="px-3 py-4 text-right whitespace-nowrap">
                       <Link
                         href={`/dashboard/tenant/requests/${item.id}`}
                         className="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
                       >
                         View details <ArrowRight className="size-4" />
                       </Link>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
             <div className="mt-4 flex justify-end">
               <Button asChild variant="link" className="px-0 text-primary">
                 <Link href="/dashboard/tenant/requests">

@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Property, RentalRequest, UserProfile } from "@/lib/types";
 
 type AdminActivityProps = {
@@ -64,32 +65,32 @@ export default function AdminActivity({ users, properties, rentals, hasError }: 
           </p>
         ) : (
           <div className="mt-5 overflow-x-auto">
-            <table className="w-full min-w-160 text-left text-sm">
-              <thead className="bg-muted text-xs font-bold text-muted-foreground">
-                <tr>
-                  <th className="rounded-l-lg px-4 py-3">ACTIVITY</th>
-                  <th className="px-3 py-3">RELATED TO</th>
-                  <th className="px-3 py-3">DATE</th>
-                  <th className="rounded-r-lg px-3 py-3">STATUS</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table className="min-w-160 text-left">
+              <TableHeader className="bg-muted text-xs font-bold text-muted-foreground">
+                <TableRow>
+                  <TableHead className="rounded-l-lg px-4 py-3">ACTIVITY</TableHead>
+                  <TableHead className="px-3 py-3">RELATED TO</TableHead>
+                  <TableHead className="px-3 py-3">DATE</TableHead>
+                  <TableHead className="rounded-r-lg px-3 py-3">STATUS</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {activities.map((item) => (
-                  <tr key={item.id} className="border-b last:border-b-0">
-                    <td className="px-4 py-4 font-semibold">{item.activity}</td>
-                    <td className="px-3 py-4 text-muted-foreground">{item.relatedTo}</td>
-                    <td className="px-3 py-4 text-muted-foreground">
+                  <TableRow key={item.id} className="border-b last:border-b-0">
+                    <TableCell className="px-4 py-4 font-semibold">{item.activity}</TableCell>
+                    <TableCell className="px-3 py-4 text-muted-foreground">{item.relatedTo}</TableCell>
+                    <TableCell className="px-3 py-4 text-muted-foreground">
                       {new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(new Date(item.date))}
-                    </td>
-                    <td className="px-3 py-4">
+                    </TableCell>
+                    <TableCell className="px-3 py-4">
                       <Badge variant="secondary" className={statusColors[item.status]}>
                         {item.status[0] + item.status.slice(1).toLowerCase()}
                       </Badge>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         )}
       </CardContent>

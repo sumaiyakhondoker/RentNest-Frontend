@@ -22,6 +22,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { logout } from "@/service/logout";
 
 ;
@@ -154,10 +155,12 @@ export function Navbar({ user }: NavbarProps) {
           {profile ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button
+                <Button
                   type="button"
                   aria-label="Open user menu"
-                  className="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border bg-primary/10 focus-visible:outline-2 focus-visible:outline-primary"
+                  variant="ghost"
+                  size="icon-lg"
+                  className="size-10 overflow-hidden rounded-full border border-border bg-primary/10 p-0"
                 >
                   {validImage && !imageError ? (
                     <Image
@@ -172,7 +175,7 @@ export function Navbar({ user }: NavbarProps) {
                   ) : (
                     <UserRound className="size-5 text-primary" />
                   )}
-                </button>
+                </Button>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent
@@ -245,43 +248,39 @@ export function Navbar({ user }: NavbarProps) {
           )}
 
           {/* Mobile Menu */}
-          <details className="relative md:hidden">
-            <summary
-              className="cursor-pointer list-none pr-2"
-              aria-label="Open navigation"
-            >
-              <Menu size={20} />
-            </summary>
-
-            <div className="absolute right-0 top-12 flex w-52 flex-col gap-2 rounded-xl border border-border bg-popover p-3 shadow-lg">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="rounded-md px-3 py-2 text-sm hover:bg-accent"
-                >
-                  {item.label}
-                </Link>
-              ))}
-
-              {!profile && (
-                <>
-                  <Link
-                    href="/auth/login"
-                    className="rounded-md px-3 py-2 text-sm hover:bg-accent"
-                  >
-                    Login
-                  </Link>
-
-                  <Button asChild size="sm">
-                    <Link href="/auth/register">
-                      Register
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Open navigation" className="md:hidden">
+                <Menu size={20} />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64 p-5 md:hidden">
+              <SheetTitle className="sr-only">Navigation</SheetTitle>
+              <div className="mt-10 flex flex-col gap-2">
+                {navItems.map((item) => (
+                  <SheetClose asChild key={item.href}>
+                    <Link href={item.href} className="rounded-md px-3 py-2 text-sm hover:bg-accent">
+                      {item.label}
                     </Link>
-                  </Button>
-                </>
-              )}
-            </div>
-          </details>
+                  </SheetClose>
+                ))}
+                {!profile && (
+                  <>
+                    <SheetClose asChild>
+                      <Link href="/auth/login" className="rounded-md px-3 py-2 text-sm hover:bg-accent">
+                        Login
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Button asChild size="sm">
+                        <Link href="/auth/register">Register</Link>
+                      </Button>
+                    </SheetClose>
+                  </>
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
     </header>
