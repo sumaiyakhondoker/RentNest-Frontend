@@ -32,7 +32,7 @@ type AllPropertiesListProps = {
           </h3>
 
           <p className="mt-2 text-sm text-muted-foreground">
-            Try changing your location, property type,
+            Try changing your search, location, amenities, property type,
             or price range.
           </p>
         </div>

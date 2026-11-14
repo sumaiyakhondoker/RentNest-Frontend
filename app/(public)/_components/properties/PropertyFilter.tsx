@@ -2,8 +2,6 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -25,15 +23,14 @@ type PropertyFilterProps = {
   const currentSortBy = searchParams.get("sortBy");
   const currentSortOrder = searchParams.get("sortOrder");
 
-  const sortValue =
-    currentSortBy === "price"
-      ? currentSortOrder === "asc"
-        ? "price-asc"
-        : "price-desc"
-      : currentSortBy === "createdAt" &&
-          currentSortOrder === "asc"
-        ? "oldest"
-        : "newest";
+  let sortValue = "newest";
+  if (currentSortBy === "price") {
+    sortValue = currentSortOrder === "asc" ? "price-asc" : "price-desc";
+  } else if (currentSortBy === "title") {
+    sortValue = currentSortOrder === "asc" ? "title-asc" : "title-desc";
+  } else if (currentSortBy === "createdAt" && currentSortOrder === "asc") {
+    sortValue = "oldest";
+  }
 
   function handleSort(value: string) {
     const params = new URLSearchParams(searchParams.toString());
@@ -51,6 +48,16 @@ type PropertyFilterProps = {
         params.set("sortOrder", "desc");
         break;
 
+      case "title-asc":
+        params.set("sortBy", "title");
+        params.set("sortOrder", "asc");
+        break;
+
+      case "title-desc":
+        params.set("sortBy", "title");
+        params.set("sortOrder", "desc");
+        break;
+
       case "oldest":
         params.set("sortBy", "createdAt");
         params.set("sortOrder", "asc");
@@ -62,17 +69,6 @@ type PropertyFilterProps = {
     }
 
     router.push(`/properties?${params.toString()}`);
-  }
-
-  function focusFilters() {
-    const element = document.getElementById("location");
-
-    element?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-
-    element?.focus({ preventScroll: true });
   }
 
   return (
@@ -91,28 +87,13 @@ type PropertyFilterProps = {
       </div>
 
       <div className="flex items-center gap-4">
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={focusFilters}
-          className="h-10.5 rounded-[9px] px-4 text-[13px] font-semibold"
-        >
-          <span
-            aria-hidden="true"
-            className="mr-2 text-lg"
-          >
-            ☷
-          </span>
-          Filters
-        </Button>
-
         <Select
           value={sortValue}
           onValueChange={handleSort}
         >
           <SelectTrigger
             aria-label="Sort properties"
-            className="h-10.5 w-42.5 border-0 bg-transparent text-[13px] shadow-none focus-visible:ring-0"
+            className="h-10.5 w-60 border-0 bg-transparent text-[13px] shadow-none focus-visible:ring-0"
           >
             <span className="text-muted-foreground">
               Sort:
@@ -135,6 +116,12 @@ type PropertyFilterProps = {
 
             <SelectItem value="price-desc">
               Price: High to Low
+            </SelectItem>
+            <SelectItem value="title-asc">
+              Title: A to Z
+            </SelectItem>
+            <SelectItem value="title-desc">
+              Title: Z to A
             </SelectItem>
           </SelectContent>
         </Select>

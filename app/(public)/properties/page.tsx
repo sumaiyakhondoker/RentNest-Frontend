@@ -36,8 +36,10 @@ export default async function PropertiesPage({
   const params = await searchParams;
 
   const query: PropertiesQuery = {
+    search: getParam(params.search),
     location: getParam(params.location),
     category: getParam(params.category),
+    amenities: getParam(params.amenities),
     minPrice: getParam(params.minPrice),
     maxPrice: getParam(params.maxPrice),
     sortBy: getParam(params.sortBy),
@@ -55,30 +57,32 @@ export default async function PropertiesPage({
       <div className="mx-auto max-w-7xl px-4 pb-16 pt-9 xl:px-0">
         <PropertyHeader />
 
-        <div className="mt-10">
-          <PropertySearchBar
-            key={resultsKey}
-            categories={categories}
-            query={query}
-          />
-        </div>
+        <div className="mt-10 grid items-start gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <aside aria-label="Property search and filters" className="lg:sticky lg:top-24">
+            <PropertySearchBar
+              key={resultsKey}
+              categories={categories}
+              query={query}
+            />
+          </aside>
 
-        <div className="mt-10">
-          <Suspense
-            key={resultsKey}
-            fallback={
-              <div className="space-y-8">
-                <div className="space-y-2">
-                  <Skeleton className="h-8 w-56" />
-                  <Skeleton className="h-4 w-72" />
+          <div className="min-w-0">
+            <Suspense
+              key={resultsKey}
+              fallback={
+                <div className="space-y-8">
+                  <div className="space-y-2">
+                    <Skeleton className="h-8 w-56" />
+                    <Skeleton className="h-4 w-72" />
+                  </div>
+
+                  <PropertiesSkeleton />
                 </div>
-
-                <PropertiesSkeleton />
-              </div>
-            }
-          >
-            <AllPropertiesList query={query} />
-          </Suspense>
+              }
+            >
+              <AllPropertiesList query={query} />
+            </Suspense>
+          </div>
         </div>
       </div>
     </main>

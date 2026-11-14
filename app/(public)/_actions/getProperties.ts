@@ -116,8 +116,10 @@ export const getHomeProperties = async () => {
 
 
 export type PropertiesQuery = {
+  search?: string;
   location?: string;
   category?: string;
+  amenities?: string;
   minPrice?: string;
   maxPrice?: string;
   sortBy?: string;
@@ -152,6 +154,14 @@ export const  getAllProperties = async(
 
   if (query.location) {
     params.set("location", query.location);
+  }
+
+  if (query.search) {
+    params.set("search", query.search);
+  }
+
+  if (query.amenities) {
+    params.set("amenities", query.amenities);
   }
 
   if (query.category && query.category !== "all") {
