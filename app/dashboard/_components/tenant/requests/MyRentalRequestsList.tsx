@@ -7,6 +7,7 @@ import {
   getRentalRequestById,
 } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
 import RentalStatusBadge from "../../shared/RentalStatusBadge";
+import LeaveReviewDialog, { ActiveReviewButton } from "./LeaveReviewDialog";
 
 function formatDate(value?: string | null) {
   return value
@@ -119,9 +120,10 @@ export default async function MyRentalRequestsList() {
                   </Button>
                 )}
                 {request.status === "ACTIVE" && (
-                  <Button size="sm" disabled title="Review form is coming soon">
-                    Leave Review
-                  </Button>
+                  <ActiveReviewButton />
+                )}
+                {request.status === "COMPLETED" && (
+                  <LeaveReviewDialog propertyId={request.propertyId} propertyTitle={request.property?.title || "this property"} />
                 )}
               </div>
             </div>

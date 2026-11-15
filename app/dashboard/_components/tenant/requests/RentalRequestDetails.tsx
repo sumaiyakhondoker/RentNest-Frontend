@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { RentalRequest } from "@/lib/types";
 import RentalStatusBadge from "../../shared/RentalStatusBadge";
+import LeaveReviewDialog, { ActiveReviewButton } from "./LeaveReviewDialog";
 
 function formatDate(value?: string | null) {
   return value
@@ -84,6 +85,10 @@ export default function RentalRequestDetails({ request }: { request: RentalReque
               </Link>
             </Button>
           )}
+          {request.status === "COMPLETED" && (
+            <LeaveReviewDialog propertyId={request.propertyId} propertyTitle={request.property?.title || "this property"} />
+          )}
+          {request.status === "ACTIVE" && <ActiveReviewButton />}
         </div>
       </CardContent>
     </Card>

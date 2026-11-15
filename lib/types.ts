@@ -33,6 +33,7 @@ export type PropertyListResponse = {
 export type Review = {
   id: string;
   tenantId: string;
+  tenant?: { name: string };
   propertyId: string;
   rating: number;
   comment: string | null;

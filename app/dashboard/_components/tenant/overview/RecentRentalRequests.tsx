@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { RentalRequest } from "@/lib/types";
 import RentalStatusBadge from "../../shared/RentalStatusBadge";
+import LeaveReviewDialog, { ActiveReviewButton } from "../requests/LeaveReviewDialog";
 
 export default function RecentRentalRequests({
   rentals,
@@ -80,9 +81,10 @@ export default function RecentRentalRequests({
                         </Button>
                       )}
                       {item.status === "ACTIVE" && (
-                        <Button size="sm" disabled title="Review form is coming soon">
-                          Leave Review
-                        </Button>
+                        <ActiveReviewButton />
+                      )}
+                      {item.status === "COMPLETED" && (
+                        <LeaveReviewDialog propertyId={item.propertyId} propertyTitle={item.property?.title || "this property"} />
                       )}
                     </TableCell>
                     <TableCell className="px-3 py-4 text-right whitespace-nowrap">

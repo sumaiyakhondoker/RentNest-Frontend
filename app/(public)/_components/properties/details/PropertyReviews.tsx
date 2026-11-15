@@ -76,7 +76,7 @@ const PropertyReviews =({
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <p className="text-sm font-semibold">
-                      Tenant Review
+                      {review.tenant?.name || "Tenant Review"}
                     </p>
 
                     <p className="text-xs text-muted-foreground">
