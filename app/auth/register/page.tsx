@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import RegisterForm from "../_components/registerForm";
+import RegisterForm from "../_components/RegisterForm";
 
 const RegisterPage=()=> {
   return (
