@@ -96,30 +96,16 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/not-found", request.url));
   }
 
-/**  if(pathname === "/premium"){
-     const statusResult = await getSubscriptionStatus()
-
-  const isActive = Boolean(
-    statusResult?.success && statusResult.data?.isSubscribed,
-  );
-
-  if(!isActive){
-       return NextResponse.redirect(new URL("/payment", request.url));
-
-  }
-  }
-
-   */
-
   //   return NextResponse.redirect(new URL('/', request.url))
   return NextResponse.next();
 }
 
+
+
+    // "/((?!api|_next/static|_next/image|.*\\.png$).*)",
+    
 export const config = {
   matcher: [
-    // '/dashboard/:path*',
-    // '/admin-dashboard/:path*'
-
-    "/((?!api|_next/static|_next/image|.*\\.png$).*)",
+    "/((?!api|_next/static|_next/image|_next/data|favicon.ico|.*\\.(?:png|jpg|jpeg|webp|gif|svg|ico)$).*)",
   ],
 };
