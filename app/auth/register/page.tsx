@@ -7,7 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-// import RegisterForm from "../_components/RegisterForm";
+import RegisterForm from "../_components/RegisterForm";
+
 
 const RegisterPage=()=> {
   return (
@@ -24,7 +25,7 @@ const RegisterPage=()=> {
           </CardHeader>
 
           <CardContent>
-            {/* <RegisterForm /> */}
+            <RegisterForm />
           </CardContent>
 
           <CardFooter className="justify-center">
