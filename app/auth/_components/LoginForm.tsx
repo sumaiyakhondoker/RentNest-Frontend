@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-const LoginForm = () => {
+const loginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
   
   const {
@@ -125,4 +125,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default loginForm;

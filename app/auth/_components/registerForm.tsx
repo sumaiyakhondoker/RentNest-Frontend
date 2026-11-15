@@ -16,7 +16,7 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { registerAction } from "../_actions/authActions";
 
-const RegisterForm=()=> {
+const registerForm=()=> {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -223,4 +223,4 @@ const RegisterForm=()=> {
 };
 
 
-export default RegisterForm;
+export default registerForm;
