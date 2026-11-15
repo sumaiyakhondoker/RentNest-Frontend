@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import DashboardPagination, { DASHBOARD_PAGE_SIZE } from "@/app/dashboard/_components/shared/DashboardPagination";
 import type { Category } from "@/app/(public)/_actions/getProperties";
 import type { Property } from "@/lib/types";
 
@@ -10,6 +14,12 @@ export default function CategoryList({
   categories: Category[] | null;
   properties: Property[] | null;
 }) {
+  const [page, setPage] = useState(1);
+  const totalItems = categories?.length || 0;
+  const totalPages = Math.max(1, Math.ceil(totalItems / DASHBOARD_PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageCategories = categories?.slice((currentPage - 1) * DASHBOARD_PAGE_SIZE, currentPage * DASHBOARD_PAGE_SIZE) || [];
+
   return (
     <Card className="min-w-0 gap-0 rounded-xl py-0 shadow-none">
       <CardContent className="p-5 sm:p-6">
@@ -32,7 +42,7 @@ export default function CategoryList({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {categories.map((category) => (
+                {pageCategories.map((category) => (
                   <TableRow key={category.id}>
                     <TableCell className="min-w-0 whitespace-normal px-4 py-5">
                       <p className="break-words font-semibold">{category.categoryName}</p>
@@ -47,6 +57,7 @@ export default function CategoryList({
             </Table>
           </div>
         )}
+        {categories && <DashboardPagination page={currentPage} totalItems={categories.length} itemLabel="categories" onPageChange={setPage} />}
       </CardContent>
     </Card>
   );

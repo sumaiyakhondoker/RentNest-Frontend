@@ -1,8 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { propertyImage } from "@/app/dashboard/_components/landlord/propertyImage";
+import DashboardPagination, { DASHBOARD_PAGE_SIZE } from "@/app/dashboard/_components/shared/DashboardPagination";
 import type { Property, UserProfile } from "@/lib/types";
 
 type Props = {
@@ -12,6 +16,11 @@ type Props = {
 };
 
 export default function PropertyModerationTable({ properties, users, hasError }: Props) {
+  const [page, setPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(properties.length / DASHBOARD_PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageProperties = properties.slice((currentPage - 1) * DASHBOARD_PAGE_SIZE, currentPage * DASHBOARD_PAGE_SIZE);
+
   return (
       <Card className="gap-0 rounded-xl py-0 shadow-none">
         <CardContent className="p-4 sm:p-5">
@@ -34,7 +43,7 @@ export default function PropertyModerationTable({ properties, users, hasError }:
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {properties.map((property) => {
+                {pageProperties.map((property) => {
                   const landlord = users.find((user) => user.id === property.landlordId);
                   return (
                     <TableRow key={property.id} className="border-b last:border-b-0">
@@ -73,6 +82,7 @@ export default function PropertyModerationTable({ properties, users, hasError }:
               </TableBody>
             </Table>
           )}
+          {!hasError && <DashboardPagination page={currentPage} totalItems={properties.length} itemLabel="properties" onPageChange={setPage} />}
         </CardContent>
       </Card>
   );

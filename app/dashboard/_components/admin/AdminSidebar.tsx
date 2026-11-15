@@ -5,7 +5,7 @@ export const adminItems = [
   { label: "Users", href: "/dashboard/admin/users", icon: UsersRound },
   { label: "Properties", href: "/dashboard/admin/properties", icon: Building2 },
   { label: "Categories", href: "/dashboard/admin/categories", icon: Tags },
-  { label: "Rental requests", href: "/dashboard/admin/requests", icon: ListChecks, disabled: true },
+  { label: "Rental requests", href: "/dashboard/admin/requests", icon: ListChecks },
   { label: "My profile", href: "/dashboard/admin/profile", icon: UserRound },
 ];
 

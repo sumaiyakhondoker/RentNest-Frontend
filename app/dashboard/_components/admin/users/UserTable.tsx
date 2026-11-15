@@ -6,19 +6,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import DashboardPagination, { DASHBOARD_PAGE_SIZE } from "@/app/dashboard/_components/shared/DashboardPagination";
 import type { UserProfile } from "@/lib/types";
 import UserStatusButton from "./UserStatusButton";
-
-const PAGE_SIZE = 10;
 
 export default function UserTable({ users, hasError }: { users: UserProfile[]; hasError: boolean }) {
   const [search, setSearch] = useState("");
@@ -33,9 +25,9 @@ export default function UserTable({ users, hasError }: { users: UserProfile[]; h
       (status === "ALL" || user.accountStatus === status),
     )
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  const totalPages = Math.max(1, Math.ceil(filteredUsers.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filteredUsers.length / DASHBOARD_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
-  const pageUsers = filteredUsers.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const pageUsers = filteredUsers.slice((currentPage - 1) * DASHBOARD_PAGE_SIZE, currentPage * DASHBOARD_PAGE_SIZE);
 
   return (
     <>
@@ -135,44 +127,7 @@ export default function UserTable({ users, hasError }: { users: UserProfile[]; h
               </Table>
             </div>
           )}
-          {!hasError && filteredUsers.length > 0 && (
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t pt-4">
-              <p className="text-sm text-muted-foreground">
-                Showing {(currentPage - 1) * PAGE_SIZE + 1}–{Math.min(currentPage * PAGE_SIZE, filteredUsers.length)} of {filteredUsers.length} users
-              </p>
-              <Pagination aria-label="User pagination" className="mx-0 w-auto justify-end">
-                <PaginationContent className="gap-3">
-                  <PaginationItem>
-                    <PaginationPrevious
-                      href="#"
-                      aria-disabled={currentPage === 1}
-                      tabIndex={currentPage === 1 ? -1 : undefined}
-                      className={currentPage === 1 ? "pointer-events-none opacity-50" : undefined}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        if (currentPage > 1) setPage(currentPage - 1);
-                      }}
-                    />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <span className="text-sm text-muted-foreground">Page {currentPage} of {totalPages}</span>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationNext
-                      href="#"
-                      aria-disabled={currentPage === totalPages}
-                      tabIndex={currentPage === totalPages ? -1 : undefined}
-                      className={currentPage === totalPages ? "pointer-events-none opacity-50" : undefined}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        if (currentPage < totalPages) setPage(currentPage + 1);
-                      }}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </div>
-          )}
+          {!hasError && <DashboardPagination page={currentPage} totalItems={filteredUsers.length} itemLabel="users" onPageChange={setPage} />}
         </CardContent>
       </Card>
     </>
