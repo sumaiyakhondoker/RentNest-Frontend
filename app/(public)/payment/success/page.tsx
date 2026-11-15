@@ -46,7 +46,7 @@ const PaymentSuccessPage = ({
     <Suspense
       fallback={
         <div className="flex min-h-96 items-center justify-center gap-3 text-primary" role="status">
-          <Spinner className="size-[55px]" />
+          <Spinner className="size-14" />
           
         </div>
       }

@@ -7,7 +7,7 @@ const DashboardLoading = () => {
       role="status"
       aria-live="polite"
     >
-      <Spinner className="size-[55px]" />
+      <Spinner className="size-14" />
     </div>
   );
 };
