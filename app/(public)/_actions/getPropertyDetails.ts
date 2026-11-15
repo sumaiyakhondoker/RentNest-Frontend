@@ -12,7 +12,7 @@ export const getPropertyDetails = async (
     }
   );
 
-  const result= await res.json();
+  const result :PropertyDetailsResponse= await res.json();
 
   return result;
 };

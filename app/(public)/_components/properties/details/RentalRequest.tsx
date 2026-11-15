@@ -1,6 +1,5 @@
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { cookies } from "next/headers";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import type { PropertyDetails } from "@/lib/types";
 import { getMyRentalRequests } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
 import { rentalRequestStatusText } from "../request/rentalRequestStatusText";
+import RequestToRentButton from "./RequestToRentButton";
 
 type Props = {
   property: PropertyDetails;
@@ -21,8 +21,9 @@ const RentalRequest=async({
   property,
 }: Props) =>{
   const available = property.availability === "AVAILABLE";
-  const rentalRequests = await getMyRentalRequests();
-  const existingRequest = rentalRequests.success && rentalRequests.data.allRentalRequests.find(
+  const isLoggedIn = Boolean((await cookies()).get("accessToken")?.value);
+  const rentalRequests = isLoggedIn ? await getMyRentalRequests() : null;
+  const existingRequest = rentalRequests?.success && rentalRequests.data.allRentalRequests.find(
     (request) => request.propertyId === property.id,
   );
   const existingRequestText = existingRequest
@@ -95,7 +96,7 @@ const RentalRequest=async({
         <p className="text-[13px] leading-6 text-muted-foreground">
           Send a rental request to the landlord.
           <br />
-          You'll pay only after approval.
+          You&apos;ll pay only after approval.
         </p>
       </CardContent>
 
@@ -113,15 +114,7 @@ const RentalRequest=async({
             Currently unavailable
           </Button>
         ) : (
-          <Button
-            asChild
-            size="lg"
-            className="h-[53px] w-full rounded-[10px]"
-          >
-            <Link href={`/properties/${property.id}/request`}>
-              Request to rent <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
-          </Button>
+          <RequestToRentButton propertyId={property.id} isLoggedIn={isLoggedIn} />
         )}
 
         <p className="text-center text-xs text-muted-foreground">
