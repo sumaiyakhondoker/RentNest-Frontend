@@ -2,7 +2,7 @@ import { getMyProfile } from "@/app/dashboard/_actions/shared/getMyProfile";
 import ProfileSummary from "./ProfileSummary";
 import ProfileDetails from "./ProfileDetails";
 
-export default async function ProfileContent() {
+const ProfileContent = async () => {
   const result = await getMyProfile();
   const profile = result.success ? result.data?.profile : null;
 
@@ -31,4 +31,6 @@ export default async function ProfileContent() {
       </main>
     </div>
   );
-}
+};
+
+export default ProfileContent;

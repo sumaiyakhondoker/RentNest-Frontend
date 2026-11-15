@@ -1,5 +1,7 @@
 import ProfileContent from "@/app/dashboard/_components/shared/profile/ProfileContent";
 
-export default function AdminProfilePage() {
+const AdminProfilePage = () => {
   return <ProfileContent />;
-}
+};
+
+export default AdminProfilePage;

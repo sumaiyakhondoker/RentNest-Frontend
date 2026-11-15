@@ -12,7 +12,7 @@ import DashboardPagination, { DASHBOARD_PAGE_SIZE } from "@/app/dashboard/_compo
 import type { UserProfile } from "@/lib/types";
 import UserStatusButton from "./UserStatusButton";
 
-export default function UserTable({ users, hasError }: { users: UserProfile[]; hasError: boolean }) {
+const UserTable = ({ users, hasError }: { users: UserProfile[]; hasError: boolean }) => {
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("ALL");
   const [status, setStatus] = useState("ALL");
@@ -132,4 +132,6 @@ export default function UserTable({ users, hasError }: { users: UserProfile[]; h
       </Card>
     </>
   );
-}
+};
+
+export default UserTable;

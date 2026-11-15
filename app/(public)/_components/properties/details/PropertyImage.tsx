@@ -56,7 +56,7 @@ const PropertyImage=({
       </div>
     </section>
   );
-}
+};
 
 
 export default  PropertyImage

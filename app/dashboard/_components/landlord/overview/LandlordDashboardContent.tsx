@@ -8,12 +8,11 @@ import LandlordMetrics from "./LandlordMetrics";
 import RecentLandlordProperties from "./RecentLandlordProperties";
 import IncomingLandlordRequests from "./IncomingLandlordRequests";
 
-export default async function LandlordDashboardContent() {
+const LandlordDashboardContent = async () => {
   const user = await getMe();
   const name = user.success ? user.data?.profile?.name || "Landlord" : "Landlord";
-  const landlordId = user.success ? user.data?.profile?.id || "" : "";
   const [propertiesResult, requestsResult] = await Promise.all([
-    getLandlordProperties(landlordId),
+    getLandlordProperties(),
     getLandlordRequests(),
   ]);
 
@@ -40,7 +39,7 @@ export default async function LandlordDashboardContent() {
             </p>
           </div>
           <Button asChild className="h-11 rounded-lg px-5">
-            <Link href="/dashboard/landlord/properties?create=1">
+            <Link href="/dashboard/landlord/properties/new">
               <Plus className="size-4" /> Add property
             </Link>
           </Button>
@@ -56,4 +55,6 @@ export default async function LandlordDashboardContent() {
       </main>
     </div>
   );
-}
+};
+
+export default LandlordDashboardContent;

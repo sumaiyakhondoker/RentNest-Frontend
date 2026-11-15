@@ -95,7 +95,7 @@ const RentalRequest=async({
         <p className="text-[13px] leading-6 text-muted-foreground">
           Send a rental request to the landlord.
           <br />
-          You&apos;ll pay only after approval.
+          You'll pay only after approval.
         </p>
       </CardContent>
 
@@ -133,6 +133,6 @@ const RentalRequest=async({
       </CardFooter>
     </Card>
   );
-}
+};
 
 export default RentalRequest

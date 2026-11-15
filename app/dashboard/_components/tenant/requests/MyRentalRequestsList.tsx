@@ -17,7 +17,7 @@ function formatDate(value?: string | null) {
     : "—";
 }
 
-export default async function MyRentalRequestsList() {
+const MyRentalRequestsList = async () => {
   const result = await getMyRentalRequests();
   if (!result.success) {
     return (
@@ -39,7 +39,7 @@ export default async function MyRentalRequestsList() {
       <Card>
         <CardContent className="space-y-4 text-center">
           <p className="text-muted-foreground">
-            You haven&apos;t sent any rental requests yet.
+            You haven't sent any rental requests yet.
           </p>
           <Button asChild>
             <Link href="/properties">
@@ -132,4 +132,6 @@ export default async function MyRentalRequestsList() {
       ))}
     </div>
   );
-}
+};
+
+export default MyRentalRequestsList;

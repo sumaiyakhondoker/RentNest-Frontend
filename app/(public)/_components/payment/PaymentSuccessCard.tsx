@@ -13,13 +13,13 @@ type Props = {
   errorMessage?: string;
 };
 
-export default function PaymentSuccessCard({
+const PaymentSuccessCard = ({
   payment,
   confirmed,
   sessionMatches,
   propertyTitle,
   errorMessage,
-}: Props) {
+}: Props) => {
   const checking = Boolean(payment && sessionMatches && payment.status === "PENDING");
   const Icon = confirmed ? Check : checking ? Clock3 : AlertCircle;
   const title = confirmed
@@ -90,4 +90,6 @@ export default function PaymentSuccessCard({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default PaymentSuccessCard;

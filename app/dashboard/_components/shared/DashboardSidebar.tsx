@@ -21,7 +21,7 @@ export type DashboardMenuItem = {
   disabled?: boolean;
 };
 
-export default function DashboardSidebar({
+const DashboardSidebar = ({
   items,
   groupLabel,
   footer,
@@ -29,7 +29,7 @@ export default function DashboardSidebar({
   items: DashboardMenuItem[];
   groupLabel: string;
   footer?: ReactNode;
-}) {
+}) => {
   return (
     <Sidebar
       collapsible="none"
@@ -67,4 +67,6 @@ export default function DashboardSidebar({
       {footer && <SidebarFooter className="p-4">{footer}</SidebarFooter>}
     </Sidebar>
   );
-}
+};
+
+export default DashboardSidebar;

@@ -1,11 +1,11 @@
 import { getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
 import RentalRequestDetails from "@/app/dashboard/_components/tenant/requests/RentalRequestDetails";
 
-export default async function RentalRequestDetailsPage({
+const RentalRequestDetailsPage = async ({
   params,
 }: {
   params: Promise<{ id: string }>;
-}) {
+}) => {
   const { id } = await params;
   const request = await getRentalRequestById(id);
 
@@ -20,4 +20,6 @@ export default async function RentalRequestDetailsPage({
       )}
     </main>
   );
-}
+};
+
+export default RentalRequestDetailsPage;

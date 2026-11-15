@@ -2,13 +2,13 @@ import { Check, Clock3, CreditCard, ListChecks } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import type { RentalRequest, Payment } from "@/lib/types";
 
-export default function TenantMetrics({
+const TenantMetrics = ({
   rentals,
   payments,
 }: {
   rentals: RentalRequest[] | null;
   payments: Payment[] | null;
-}) {
+}) => {
   const metrics = [
     {
       label: "Total requests",
@@ -57,4 +57,6 @@ export default function TenantMetrics({
       ))}
     </div>
   );
-}
+};
+
+export default TenantMetrics;

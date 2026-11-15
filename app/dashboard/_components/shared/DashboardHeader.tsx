@@ -28,13 +28,13 @@ const pageTitles: Record<UserProfile["role"], Record<string, { title: string; de
   },
 };
 
-export default function DashboardHeader({
+const DashboardHeader = ({
   role,
   userMenu,
 }: {
   role: UserProfile["role"];
   userMenu: ReactNode;
-}) {
+}) => {
   const pathname = usePathname();
   let page = pageTitles[role][pathname];
 
@@ -63,4 +63,6 @@ export default function DashboardHeader({
       </div>
     </header>
   );
-}
+};
+
+export default DashboardHeader;

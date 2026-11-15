@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { updateAdminUserStatus } from "@/app/dashboard/_actions/admin/updateAdminUserStatus";
 import type { UserProfile } from "@/lib/types";
 
-export default function UserStatusButton({ user }: { user: UserProfile }) {
+const UserStatusButton = ({ user }: { user: UserProfile }) => {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const isBanned = user.accountStatus === "BANNED";
@@ -37,4 +37,6 @@ export default function UserStatusButton({ user }: { user: UserProfile }) {
       {pending ? "Updating..." : isBanned ? "Unban" : "Ban"}
     </Button>
   );
-}
+};
+
+export default UserStatusButton;

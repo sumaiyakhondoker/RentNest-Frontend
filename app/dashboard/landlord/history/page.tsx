@@ -1,5 +1,7 @@
 import LandlordHistoryContent from "@/app/dashboard/_components/landlord/history/LandlordHistoryContent";
 
-export default function LandlordHistoryPage() {
+const LandlordHistoryPage = () => {
   return <LandlordHistoryContent />;
-}
+};
+
+export default LandlordHistoryPage;

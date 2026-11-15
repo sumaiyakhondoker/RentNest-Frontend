@@ -3,13 +3,13 @@ import { Separator } from "@/components/ui/separator";
 import RentalStatusBadge from "@/app/dashboard/_components/shared/RentalStatusBadge";
 import type { LandlordRentalRequest, Property } from "@/lib/types";
 
-export default function RentalHistoryCard({
+const RentalHistoryCard = ({
   request,
   property,
 }: {
   request: LandlordRentalRequest;
   property?: Property;
-}) {
+}) => {
   const date = (value: string) =>
     new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(new Date(value));
   const rent = property
@@ -58,4 +58,6 @@ export default function RentalHistoryCard({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default RentalHistoryCard;

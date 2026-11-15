@@ -1,19 +1,15 @@
-import { getMe } from "@/service/getMe";
 import { getAllCategories } from "@/app/(public)/_actions/getProperties";
 import { getLandlordProperties } from "@/app/dashboard/_actions/landlord/getLandlordProperties";
 import PropertyCard from "./PropertyCard";
 import PropertyFormDialog from "./PropertyFormDialog";
 
-export default async function MyPropertiesContent({
-  searchParams,
+const MyPropertiesContent = async ({
+  query,
 }: {
-  searchParams: Promise<{ edit?: string; create?: string }>;
-}) {
-  const query = await searchParams;
-  const user = await getMe();
-  const landlordId = user.success ? user.data?.profile?.id || "" : "";
+  query: { edit?: string };
+}) => {
   const [result, categories] = await Promise.all([
-    getLandlordProperties(landlordId),
+    getLandlordProperties(),
     getAllCategories().catch(() => []),
   ]);
   const properties = result.success
@@ -31,7 +27,7 @@ export default async function MyPropertiesContent({
               Create and manage the properties in your portfolio.
             </p>
           </div>
-          <PropertyFormDialog categories={categories} openOnLoad={query.create === "1"} />
+          <PropertyFormDialog categories={categories} />
         </div>
 
         {!result.success ? (
@@ -62,4 +58,6 @@ export default async function MyPropertiesContent({
       </main>
     </div>
   );
-}
+};
+
+export default MyPropertiesContent;

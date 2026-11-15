@@ -18,7 +18,6 @@ export const getNewAccessToken = async() => {
         }
     }
 
-    // console.log(process.env.BACKEND_API_URL);
 
     const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/refresh-token`, {
         method: 'POST',
@@ -40,7 +39,6 @@ export const getNewAccessToken = async() => {
   }
 
     const result = await res.json()
-// console.log('result of refreshToken.startsWith', result);
     return result
 
 };

@@ -9,7 +9,7 @@ type Props = {
   errorMessage?: string;
 };
 
-export default function PaymentCancelCard({ payment, errorMessage }: Props) {
+const PaymentCancelCard = ({ payment, errorMessage }: Props) => {
   const isCompleted = payment?.status === "COMPLETED";
   const isUnavailable = !payment;
   const canRetry =
@@ -75,4 +75,6 @@ export default function PaymentCancelCard({ payment, errorMessage }: Props) {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default PaymentCancelCard;

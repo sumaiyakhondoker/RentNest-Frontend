@@ -128,7 +128,7 @@ type PropertyFilterProps = {
       </div>
     </div>
   );
-}
+};
 
 
 export default PropertyFilter

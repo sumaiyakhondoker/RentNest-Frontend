@@ -18,7 +18,6 @@ export const getMe = async() => {
         }
     }
 
-    // console.log(process.env.BACKEND_API_URL);
 
     const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/me`, {
         headers:{
@@ -33,7 +32,6 @@ export const getMe = async() => {
         }
     })
 
-    // console.log(res)
 
     const result = res.json()
 

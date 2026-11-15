@@ -158,7 +158,7 @@ const RegisterForm=()=> {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="TENANT">Tenant — I&apos;m looking for a home</SelectItem>
+                <SelectItem value="TENANT">Tenant — I'm looking for a home</SelectItem>
                 <SelectItem value="LANDLORD">Landlord — I want to list a property</SelectItem>
               </SelectContent>
             </Select>
@@ -220,7 +220,7 @@ const RegisterForm=()=> {
       </Button>
     </form>
   );
-}
+};
 
 
 export default RegisterForm;

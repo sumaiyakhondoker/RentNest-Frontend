@@ -14,7 +14,7 @@ function formatDate(value?: string | null) {
     : "—";
 }
 
-export default function RentalRequestDetails({ request }: { request: RentalRequest }) {
+const RentalRequestDetails = ({ request }: { request: RentalRequest }) => {
   const rent = request.property
     ? new Intl.NumberFormat("en-BD", {
         style: "currency",
@@ -86,11 +86,13 @@ export default function RentalRequestDetails({ request }: { request: RentalReque
             </Button>
           )}
           {request.status === "COMPLETED" && (
-            <LeaveReviewDialog propertyId={request.propertyId} propertyTitle={request.property?.title || "this property"} />
+            <LeaveReviewDialog propertyId={request.propertyId} propertyTitle={request.property?.title || "this property"} size="default" />
           )}
-          {request.status === "ACTIVE" && <ActiveReviewButton />}
+          {request.status === "ACTIVE" && <ActiveReviewButton size="default" />}
         </div>
       </CardContent>
     </Card>
   );
-}
+};
+
+export default RentalRequestDetails;

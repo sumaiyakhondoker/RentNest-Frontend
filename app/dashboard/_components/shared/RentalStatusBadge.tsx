@@ -9,10 +9,12 @@ const statusColors: Record<RentalRequest["status"], string> = {
   COMPLETED: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200",
 };
 
-export default function RentalStatusBadge({ status }: { status: RentalRequest["status"] }) {
+const RentalStatusBadge = ({ status }: { status: RentalRequest["status"] }) => {
   return (
     <Badge variant="secondary" className={statusColors[status]}>
       {status[0] + status.slice(1).toLowerCase()}
     </Badge>
   );
-}
+};
+
+export default RentalStatusBadge;

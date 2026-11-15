@@ -7,13 +7,13 @@ import type { RentalRequest } from "@/lib/types";
 import RentalStatusBadge from "../../shared/RentalStatusBadge";
 import LeaveReviewDialog, { ActiveReviewButton } from "../requests/LeaveReviewDialog";
 
-export default function RecentRentalRequests({
+const RecentRentalRequests = ({
   rentals,
   hasError,
 }: {
   rentals: RentalRequest[];
   hasError: boolean;
-}) {
+}) => {
   const money = (amount: number) =>
     new Intl.NumberFormat("en-BD", {
       style: "currency",
@@ -111,4 +111,6 @@ export default function RecentRentalRequests({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default RecentRentalRequests;

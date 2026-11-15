@@ -9,9 +9,9 @@ import RentalRequestFormAccess from "@/app/(public)/_components/properties/reque
 import PropertySummaryCard from "@/app/(public)/_components/properties/request/PropertySummaryCard";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default async function RequestPage({
+const RequestPage = async ({
   params,
-}: PageProps<"/properties/[id]/request">) {
+}: PageProps<"/properties/[id]/request">) => {
   const { id } = await params;
 
   const result = await getPropertyDetails(id);
@@ -93,4 +93,6 @@ export default async function RequestPage({
       </div>
     </div>
   );
-}
+};
+
+export default RequestPage;

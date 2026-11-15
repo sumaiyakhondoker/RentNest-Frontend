@@ -7,13 +7,13 @@ import DashboardPagination, { DASHBOARD_PAGE_SIZE } from "@/app/dashboard/_compo
 import type { Category } from "@/app/(public)/_actions/getProperties";
 import type { Property } from "@/lib/types";
 
-export default function CategoryList({
+const CategoryList = ({
   categories,
   properties,
 }: {
   categories: Category[] | null;
   properties: Property[] | null;
-}) {
+}) => {
   const [page, setPage] = useState(1);
   const totalItems = categories?.length || 0;
   const totalPages = Math.max(1, Math.ceil(totalItems / DASHBOARD_PAGE_SIZE));
@@ -61,4 +61,6 @@ export default function CategoryList({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default CategoryList;

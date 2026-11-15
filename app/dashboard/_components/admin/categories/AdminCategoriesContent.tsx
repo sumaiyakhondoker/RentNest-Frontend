@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import CategoryList from "./CategoryList";
 import CategoryForm from "./CategoryForm";
 
-export default async function AdminCategoriesContent() {
+const AdminCategoriesContent = async () => {
   const [categories, propertiesResult] = await Promise.all([
     getAllCategories().catch(() => null),
     getAdminProperties(),
@@ -33,4 +33,6 @@ export default async function AdminCategoriesContent() {
       </div>
     </main>
   );
-}
+};
+
+export default AdminCategoriesContent;

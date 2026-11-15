@@ -1,7 +1,7 @@
 import { Building2, ListChecks, Tags, UsersRound } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function AdminMetrics({
+const AdminMetrics = ({
   users,
   properties,
   rentals,
@@ -11,7 +11,7 @@ export default function AdminMetrics({
   properties: number | null;
   rentals: number | null;
   categories: number | null;
-}) {
+}) => {
   const metrics = [
     { label: "Total users", value: users, detail: "Tenant & landlord accounts", icon: UsersRound },
     { label: "Total properties", value: properties, detail: "Published platform listings", icon: Building2 },
@@ -39,4 +39,6 @@ export default function AdminMetrics({
       ))}
     </div>
   );
-}
+};
+
+export default AdminMetrics;

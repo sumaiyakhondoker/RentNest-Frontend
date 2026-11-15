@@ -13,6 +13,6 @@ const HomePage = async() => {
       <CategoriesSection />
     </div>
   );
-}
+};
 
 export default HomePage;

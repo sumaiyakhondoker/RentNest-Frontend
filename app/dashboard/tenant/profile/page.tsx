@@ -1,5 +1,7 @@
 import ProfileContent from "@/app/dashboard/_components/shared/profile/ProfileContent";
 
-export default function MyProfilePage() {
+const MyProfilePage = () => {
   return <ProfileContent />;
-}
+};
+
+export default MyProfilePage;

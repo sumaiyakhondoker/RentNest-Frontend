@@ -20,7 +20,7 @@ function formatDate(value?: string | null) {
     : "—";
 }
 
-export default function AdminRequestsTable({ requests, properties, users, hasError }: Props) {
+const AdminRequestsTable = ({ requests, properties, users, hasError }: Props) => {
   const [page, setPage] = useState(1);
   const totalPages = Math.max(1, Math.ceil(requests.length / DASHBOARD_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -77,4 +77,6 @@ export default function AdminRequestsTable({ requests, properties, users, hasErr
       </CardContent>
     </Card>
   );
-}
+};
+
+export default AdminRequestsTable;

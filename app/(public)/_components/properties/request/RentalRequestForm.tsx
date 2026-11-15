@@ -24,7 +24,7 @@ type Props = {
   propertyId: string;
 };
 
-export default function RentalRequestForm({ propertyId }: Props) {
+const RentalRequestForm = ({ propertyId }: Props) => {
   const router = useRouter();
 
   const {
@@ -145,4 +145,6 @@ export default function RentalRequestForm({ propertyId }: Props) {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default RentalRequestForm;

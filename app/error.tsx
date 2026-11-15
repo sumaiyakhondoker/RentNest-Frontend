@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button"
 
  
 
-export default function Error({
+const Error = ({
   error,
   retry,
 }: {
   error: unknown
   retry: () => void
-}) {
+}) => {
   return (
      <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4 text-center">
       <h1 className="text-3xl font-bold">Something went wrong!</h1>
@@ -19,5 +19,7 @@ export default function Error({
       <Button onClick={retry}>Try again</Button>
     </div>
   )
-}
+};
+
+export default Error;
 

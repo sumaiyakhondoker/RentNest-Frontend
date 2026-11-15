@@ -6,9 +6,9 @@ type Props = {
   amenities: string[];
 };
 
-export default function PropertyAmenities({
+const PropertyAmenities = ({
   amenities,
-}: Props) {
+}: Props) => {
   return (
     <section className="space-y-6">
       <h2 className="text-[22px] font-bold">
@@ -37,4 +37,6 @@ export default function PropertyAmenities({
       )}
     </section>
   );
-}
+};
+
+export default PropertyAmenities;

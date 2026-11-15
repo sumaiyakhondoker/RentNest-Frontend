@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Payment, Property } from "@/lib/types";
 
-export default function RecentPayment({
+const RecentPayment = ({
   payment,
   property,
   hasError,
@@ -11,7 +11,7 @@ export default function RecentPayment({
   payment: Payment | null;
   property?: Property;
   hasError: boolean;
-}) {
+}) => {
   const money = (amount: number) =>
     new Intl.NumberFormat("en-BD", {
       style: "currency",
@@ -72,4 +72,6 @@ export default function RecentPayment({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default RecentPayment;

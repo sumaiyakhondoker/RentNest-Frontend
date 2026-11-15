@@ -1,6 +1,6 @@
 import MyRentalRequestsList from "@/app/dashboard/_components/tenant/requests/MyRentalRequestsList";
 
-export default function MyRentalRequestsPage() {
+const MyRentalRequestsPage = () => {
   return (
     <main className="mx-auto max-w-7xl space-y-6 px-5 py-8 sm:px-8 lg:px-10">
       <div>
@@ -12,4 +12,6 @@ export default function MyRentalRequestsPage() {
       <MyRentalRequestsList />
     </main>
   );
-}
+};
+
+export default MyRentalRequestsPage;

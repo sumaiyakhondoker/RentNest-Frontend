@@ -2,7 +2,7 @@ import { getAdminUsers } from "@/app/dashboard/_actions/admin/getAdminUsers";
 import UserSummary from "./UserSummary";
 import UserTable from "./UserTable";
 
-export default async function UserManagementContent() {
+const UserManagementContent = async () => {
   const usersResult = await getAdminUsers();
   const users = usersResult.success ? usersResult.data.allUsers : [];
 
@@ -21,4 +21,6 @@ export default async function UserManagementContent() {
       </main>
     </div>
   );
-}
+};
+
+export default UserManagementContent;

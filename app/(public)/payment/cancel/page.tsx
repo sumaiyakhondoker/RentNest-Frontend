@@ -40,11 +40,11 @@ async function PaymentCancelContent({ searchParams }: { searchParams: CancelSear
   );
 }
 
-export default function PaymentCancelPage({
+const PaymentCancelPage = ({
   searchParams,
 }: {
   searchParams: CancelSearchParams;
-}) {
+}) => {
   return (
     <Suspense
       fallback={
@@ -57,4 +57,6 @@ export default function PaymentCancelPage({
       <PaymentCancelContent searchParams={searchParams} />
     </Suspense>
   );
-}
+};
+
+export default PaymentCancelPage;

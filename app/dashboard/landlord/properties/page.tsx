@@ -1,9 +1,12 @@
 import MyPropertiesContent from "@/app/dashboard/_components/landlord/properties/MyPropertiesContent";
 
-export default function MyPropertiesPage({
+const MyPropertiesPage = async ({
   searchParams,
 }: {
   searchParams: Promise<{ edit?: string; create?: string }>;
-}) {
-  return <MyPropertiesContent searchParams={searchParams} />;
-}
+}) => {
+  const query = await searchParams;
+  return <MyPropertiesContent query={query} />;
+};
+
+export default MyPropertiesPage;

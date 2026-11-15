@@ -54,6 +54,6 @@ type AllPropertiesListProps = {
       />
     </section>
   );
-}
+};
 
 export default AllPropertiesList

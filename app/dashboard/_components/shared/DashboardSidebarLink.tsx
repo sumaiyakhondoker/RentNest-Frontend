@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 
-export default function DashboardSidebarLink({
+const DashboardSidebarLink = ({
   href,
   label,
   icon,
@@ -15,7 +15,7 @@ export default function DashboardSidebarLink({
   label: string;
   icon: ReactNode;
   disabled?: boolean;
-}) {
+}) => {
   const pathname = usePathname();
   const isNestedPage = label !== "Overview" && pathname.startsWith(`${href}/`);
   const isActive = pathname === href || isNestedPage;
@@ -35,4 +35,6 @@ export default function DashboardSidebarLink({
       )}
     </SidebarMenuItem>
   );
-}
+};
+
+export default DashboardSidebarLink;

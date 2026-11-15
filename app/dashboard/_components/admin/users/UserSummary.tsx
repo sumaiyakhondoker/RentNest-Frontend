@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import type { UserProfile } from "@/lib/types";
 
-export default function UserSummary({ users, total }: { users: UserProfile[]; total: number }) {
+const UserSummary = ({ users, total }: { users: UserProfile[]; total: number }) => {
   const summaries = [
     { label: "All users", value: total },
     { label: "Tenants", value: users.filter((user) => user.role === "TENANT").length },
@@ -21,4 +21,6 @@ export default function UserSummary({ users, total }: { users: UserProfile[]; to
       </CardContent>
     </Card>
   );
-}
+};
+
+export default UserSummary;

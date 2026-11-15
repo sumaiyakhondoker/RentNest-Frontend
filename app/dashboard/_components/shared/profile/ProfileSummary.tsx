@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserRound } from "lucide-react";
 import type { UserProfile } from "@/lib/types";
 
-export default function ProfileSummary({ profile }: { profile: UserProfile }) {
+const ProfileSummary = ({ profile }: { profile: UserProfile }) => {
   const imageUrl = profile.profileImage?.trim();
   const validImage = imageUrl?.startsWith("https://") || imageUrl?.startsWith("http://");
 
@@ -29,4 +29,6 @@ export default function ProfileSummary({ profile }: { profile: UserProfile }) {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default ProfileSummary;

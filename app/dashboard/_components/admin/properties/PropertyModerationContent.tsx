@@ -2,7 +2,7 @@ import { getAdminProperties } from "@/app/dashboard/_actions/admin/getAdminPrope
 import { getAdminUsers } from "@/app/dashboard/_actions/admin/getAdminUsers";
 import PropertyModerationTable from "./PropertyModerationTable";
 
-export default async function PropertyModerationContent() {
+const PropertyModerationContent = async () => {
   const [propertiesResult, usersResult] = await Promise.all([
     getAdminProperties(),
     getAdminUsers(),
@@ -26,4 +26,6 @@ export default async function PropertyModerationContent() {
       </main>
     </div>
   );
-}
+};
+
+export default PropertyModerationContent;

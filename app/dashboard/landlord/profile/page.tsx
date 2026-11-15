@@ -1,5 +1,7 @@
 import ProfileContent from "@/app/dashboard/_components/shared/profile/ProfileContent";
 
-export default function LandlordProfilePage() {
+const LandlordProfilePage = () => {
   return <ProfileContent />;
-}
+};
+
+export default LandlordProfilePage;

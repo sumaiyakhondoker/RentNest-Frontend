@@ -7,7 +7,7 @@ import TenantMetrics from "./TenantMetrics";
 import RecentRentalRequests from "./RecentRentalRequests";
 import RecentPayment from "./RecentPayment";
 
-export default async function TenantDashboardContent() {
+const TenantDashboardContent = async () => {
   const [profileResult, rentalsResult, paymentsResult] = await Promise.all([
     getMe(),
     getMyRentalRequests(),
@@ -38,7 +38,7 @@ export default async function TenantDashboardContent() {
           <div>
             <p className="text-xs font-bold tracking-wide text-primary">RENTAL OVERVIEW</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight">Welcome back, {name.split(" ")[0]}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Here&apos;s a snapshot of your rental journey.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Here's a snapshot of your rental journey.</p>
           </div>
           <Button asChild className="h-11 rounded-lg px-5">
             <Link href="/properties">Browse properties</Link>
@@ -51,4 +51,6 @@ export default async function TenantDashboardContent() {
       </main>
     </div>
   );
-}
+};
+
+export default TenantDashboardContent;

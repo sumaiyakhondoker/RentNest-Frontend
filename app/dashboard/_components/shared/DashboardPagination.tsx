@@ -10,7 +10,7 @@ import {
 
 export const DASHBOARD_PAGE_SIZE = 10;
 
-export default function DashboardPagination({
+const DashboardPagination = ({
   page,
   totalItems,
   itemLabel,
@@ -20,7 +20,7 @@ export default function DashboardPagination({
   totalItems: number;
   itemLabel: string;
   onPageChange: (page: number) => void;
-}) {
+}) => {
   if (totalItems === 0) return null;
 
   const totalPages = Math.max(1, Math.ceil(totalItems / DASHBOARD_PAGE_SIZE));
@@ -66,4 +66,6 @@ export default function DashboardPagination({
       </Pagination>
     </div>
   );
-}
+};
+
+export default DashboardPagination;

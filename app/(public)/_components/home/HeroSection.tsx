@@ -26,7 +26,7 @@ const HeroSection =() => {
           </Badge>
 
           <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Find a place you&apos;ll
+            Find a place you'll
             <span className="text-primary"> love to call home.</span>
           </h1>
 
@@ -53,6 +53,6 @@ const HeroSection =() => {
       </div>
     </section>
   );
-}
+};
 
 export default HeroSection

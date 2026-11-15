@@ -1,6 +1,6 @@
 import { Spinner } from "@/components/ui/spinner";
 
-export default function DashboardLoading() {
+const DashboardLoading = () => {
   return (
     <div
       className="flex min-h-screen w-full items-center justify-center text-primary"
@@ -10,4 +10,6 @@ export default function DashboardLoading() {
       <Spinner className="size-[55px]" />
     </div>
   );
-}
+};
+
+export default DashboardLoading;

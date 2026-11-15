@@ -64,7 +64,7 @@ async function PropertiesContent({ searchParams }: PageProps) {
   );
 }
 
-export default function PropertiesPage({ searchParams }: PageProps) {
+const PropertiesPage = ({ searchParams }: PageProps) => {
   return (
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-4 pb-16 pt-9 xl:px-0">
@@ -90,4 +90,6 @@ export default function PropertiesPage({ searchParams }: PageProps) {
       </div>
     </main>
   );
-}
+};
+
+export default PropertiesPage;

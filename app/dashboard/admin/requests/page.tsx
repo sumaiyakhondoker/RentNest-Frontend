@@ -1,5 +1,7 @@
 import AdminRequestsContent from "@/app/dashboard/_components/admin/requests/AdminRequestsContent";
 
-export default function AdminRequestsPage() {
+const AdminRequestsPage = () => {
   return <AdminRequestsContent />;
-}
+};
+
+export default AdminRequestsPage;

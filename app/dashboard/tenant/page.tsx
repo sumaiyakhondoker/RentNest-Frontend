@@ -1,5 +1,7 @@
 import TenantDashboardContent from "@/app/dashboard/_components/tenant/overview/TenantDashboardContent";
 
-export default function TenantDashboardPage() {
+const TenantDashboardPage = () => {
   return <TenantDashboardContent />;
-}
+};
+
+export default TenantDashboardPage;

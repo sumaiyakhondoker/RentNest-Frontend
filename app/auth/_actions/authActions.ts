@@ -75,7 +75,6 @@ return result
 
 export const registerAction = async(data:RegisterFormValues)=>{
 
-    // console.log('data inside action');
 
 const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/register`, {
     method:"POST",

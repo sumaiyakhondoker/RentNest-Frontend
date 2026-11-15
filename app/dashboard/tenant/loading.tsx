@@ -1,5 +1,7 @@
 import DashboardNavigationLoading from "@/app/dashboard/_components/shared/DashboardNavigationLoading";
 
-export default function TenantLoading() {
+const TenantLoading = () => {
   return <DashboardNavigationLoading />;
-}
+};
+
+export default TenantLoading;

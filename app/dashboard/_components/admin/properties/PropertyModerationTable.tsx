@@ -15,7 +15,7 @@ type Props = {
   hasError: boolean;
 };
 
-export default function PropertyModerationTable({ properties, users, hasError }: Props) {
+const PropertyModerationTable = ({ properties, users, hasError }: Props) => {
   const [page, setPage] = useState(1);
   const totalPages = Math.max(1, Math.ceil(properties.length / DASHBOARD_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -86,4 +86,6 @@ export default function PropertyModerationTable({ properties, users, hasError }:
         </CardContent>
       </Card>
   );
-}
+};
+
+export default PropertyModerationTable;

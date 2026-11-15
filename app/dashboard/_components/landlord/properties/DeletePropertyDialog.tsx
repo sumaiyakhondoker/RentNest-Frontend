@@ -18,13 +18,13 @@ import {
 } from "@/components/ui/alert-dialog";
 import { deleteLandlordProperty } from "@/app/dashboard/_actions/landlord/deleteLandlordProperty";
 
-export default function DeletePropertyDialog({
+const DeletePropertyDialog = ({
   propertyId,
   propertyTitle,
 }: {
   propertyId: string;
   propertyTitle: string;
-}) {
+}) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -67,4 +67,6 @@ export default function DeletePropertyDialog({
       </AlertDialogContent>
     </AlertDialog>
   );
-}
+};
+
+export default DeletePropertyDialog;

@@ -1,5 +1,7 @@
 import AdminCategoriesContent from "@/app/dashboard/_components/admin/categories/AdminCategoriesContent";
 
-export default function AdminCategoriesPage() {
+const AdminCategoriesPage = () => {
   return <AdminCategoriesContent />;
-}
+};
+
+export default AdminCategoriesPage;

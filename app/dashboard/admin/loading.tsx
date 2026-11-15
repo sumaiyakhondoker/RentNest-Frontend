@@ -1,5 +1,7 @@
 import DashboardNavigationLoading from "@/app/dashboard/_components/shared/DashboardNavigationLoading";
 
-export default function AdminLoading() {
+const AdminLoading = () => {
   return <DashboardNavigationLoading />;
-}
+};
+
+export default AdminLoading;

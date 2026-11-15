@@ -21,7 +21,7 @@ const statusColors: Record<string, string> = {
   RENTED: "bg-gray-100 text-gray-700",
 };
 
-export default function AdminActivity({ users, properties, rentals, hasError }: AdminActivityProps) {
+const AdminActivity = ({ users, properties, rentals, hasError }: AdminActivityProps) => {
   const propertyNames = new Map(properties.map((property) => [property.id, property.title]));
   const activities = [
     ...users.map((user) => ({
@@ -96,4 +96,6 @@ export default function AdminActivity({ users, properties, rentals, hasError }: 
       </CardContent>
     </Card>
   );
-}
+};
+
+export default AdminActivity;

@@ -5,7 +5,7 @@ import { getMyRentalRequests } from "@/app/dashboard/_actions/tenant/getMyRental
 import RentalRequestForm from "./RentalRequestForm";
 import { rentalRequestStatusText } from "./rentalRequestStatusText";
 
-export default async function RentalRequestFormAccess({ propertyId }: { propertyId: string }) {
+const RentalRequestFormAccess = async ({ propertyId }: { propertyId: string }) => {
   const result = await getMyRentalRequests();
   const existingRequest = result.success && result.data.allRentalRequests.find(
     (request) => request.propertyId === propertyId,
@@ -29,4 +29,6 @@ export default async function RentalRequestFormAccess({ propertyId }: { property
   }
 
   return <RentalRequestForm propertyId={propertyId} />;
-}
+};
+
+export default RentalRequestFormAccess;

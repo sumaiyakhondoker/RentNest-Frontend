@@ -8,7 +8,7 @@ import { propertyImage } from "@/app/dashboard/_components/landlord/propertyImag
 import PropertyFormDialog from "./PropertyFormDialog";
 import DeletePropertyDialog from "./DeletePropertyDialog";
 
-export default function PropertyCard({
+const PropertyCard = ({
   property,
   categories,
   openEdit,
@@ -16,7 +16,7 @@ export default function PropertyCard({
   property: Property;
   categories: Category[];
   openEdit: boolean;
-}) {
+}) => {
   const category = categories.find((item) => item.id === property.categoryId);
   const rent = new Intl.NumberFormat("en-BD", {
     style: "currency",
@@ -62,4 +62,6 @@ export default function PropertyCard({
       </CardFooter>
     </Card>
   );
-}
+};
+
+export default PropertyCard;

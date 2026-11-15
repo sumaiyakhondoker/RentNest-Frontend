@@ -3,7 +3,7 @@ import { getAdminProperties } from "@/app/dashboard/_actions/admin/getAdminPrope
 import { getAdminUsers } from "@/app/dashboard/_actions/admin/getAdminUsers";
 import AdminRequestsTable from "./AdminRequestsTable";
 
-export default async function AdminRequestsContent() {
+const AdminRequestsContent = async () => {
   const [rentalsResult, propertiesResult, usersResult] = await Promise.all([
     getAdminRentals(),
     getAdminProperties(),
@@ -30,4 +30,6 @@ export default async function AdminRequestsContent() {
       />
     </main>
   );
-}
+};
+
+export default AdminRequestsContent;

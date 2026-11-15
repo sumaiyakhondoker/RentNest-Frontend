@@ -5,13 +5,13 @@ import RentalStatusBadge from "@/app/dashboard/_components/shared/RentalStatusBa
 import type { LandlordRentalRequest, Property } from "@/lib/types";
 import RequestActions from "./RequestActions";
 
-export default function PendingRequestCard({
+const PendingRequestCard = ({
   request,
   property,
 }: {
   request: LandlordRentalRequest;
   property?: Property;
-}) {
+}) => {
   const tenantName = request.tenant?.name || `Tenant ${request.tenantId.slice(0, 8)}`;
   const initials = tenantName.split(" ").slice(0, 2).map((part) => part[0]).join("").toUpperCase();
   const received = new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(new Date(request.createdAt));
@@ -50,4 +50,6 @@ export default function PendingRequestCard({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default PendingRequestCard;

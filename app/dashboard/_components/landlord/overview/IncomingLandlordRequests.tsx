@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import type { LandlordRentalRequest, Property } from "@/lib/types";
 import RentalStatusBadge from "@/app/dashboard/_components/shared/RentalStatusBadge";
 
-export default function IncomingLandlordRequests({
+const IncomingLandlordRequests = ({
   requests,
   properties,
   hasError,
@@ -13,7 +13,7 @@ export default function IncomingLandlordRequests({
   requests: LandlordRentalRequest[];
   properties: Property[];
   hasError: boolean;
-}) {
+}) => {
   const propertyNames = new Map(properties.map((property) => [property.id, property.title]));
   const date = (value: string) =>
     new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(new Date(value));
@@ -77,4 +77,6 @@ export default function IncomingLandlordRequests({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default IncomingLandlordRequests;

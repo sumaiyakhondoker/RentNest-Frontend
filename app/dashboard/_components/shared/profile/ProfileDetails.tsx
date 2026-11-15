@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import type { UserProfile } from "@/lib/types";
 
-export default function ProfileDetails({ profile }: { profile: UserProfile }) {
+const ProfileDetails = ({ profile }: { profile: UserProfile }) => {
   const joined = new Intl.DateTimeFormat("en-US", {
     dateStyle: "medium",
   }).format(new Date(profile.createdAt));
@@ -61,4 +61,6 @@ export default function ProfileDetails({ profile }: { profile: UserProfile }) {
       </Card>
     </div>
   );
-}
+};
+
+export default ProfileDetails;

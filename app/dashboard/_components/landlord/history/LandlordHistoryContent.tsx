@@ -1,14 +1,11 @@
-import { getMe } from "@/service/getMe";
 import { getLandlordRequests } from "@/app/dashboard/_actions/landlord/getLandlordRequests";
 import { getLandlordProperties } from "@/app/dashboard/_actions/landlord/getLandlordProperties";
 import RentalHistoryCard from "./RentalHistoryCard";
 
-export default async function LandlordHistoryContent() {
-  const user = await getMe();
-  const landlordId = user.success ? user.data?.profile?.id || "" : "";
+const LandlordHistoryContent = async () => {
   const [requestsResult, propertiesResult] = await Promise.all([
     getLandlordRequests(),
-    getLandlordProperties(landlordId),
+    getLandlordProperties(),
   ]);
   const history = requestsResult.success
     ? requestsResult.data.allRentalRequests
@@ -56,4 +53,6 @@ export default async function LandlordHistoryContent() {
       </main>
     </div>
   );
-}
+};
+
+export default LandlordHistoryContent;

@@ -16,13 +16,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/service/logout";
 
-export default function DashboardUserMenu({
+const DashboardUserMenu = ({
   name,
   profileImage,
 }: {
   name: string;
   profileImage?: string | null;
-}) {
+}) => {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const imageUrl = profileImage?.trim();
@@ -67,4 +67,6 @@ export default function DashboardUserMenu({
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default DashboardUserMenu;

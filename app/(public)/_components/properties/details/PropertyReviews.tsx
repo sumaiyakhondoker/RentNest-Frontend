@@ -119,7 +119,7 @@ const PropertyReviews =({
       )}
     </section>
   );
-}
+};
 
 
 export default PropertyReviews

@@ -5,7 +5,7 @@ import { getAdminRentals } from "@/app/dashboard/_actions/admin/getAdminRentals"
 import AdminMetrics from "./AdminMetrics";
 import AdminActivity from "./AdminActivity";
 
-export default async function AdminDashboardContent() {
+const AdminDashboardContent = async () => {
   const [usersResult, propertiesResult, rentalsResult, categories] = await Promise.all([
     getAdminUsers(),
     getAdminProperties(),
@@ -42,4 +42,6 @@ export default async function AdminDashboardContent() {
       </main>
     </div>
   );
-}
+};
+
+export default AdminDashboardContent;

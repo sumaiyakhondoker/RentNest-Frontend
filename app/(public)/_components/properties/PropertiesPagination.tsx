@@ -15,11 +15,11 @@ type PropertiesPaginationProps = {
   query: PropertiesQuery;
 };
 
-export default function PropertiesPagination({
+const PropertiesPagination = ({
   currentPage,
   totalPages,
   query,
-}: PropertiesPaginationProps) {
+}: PropertiesPaginationProps) => {
   if (totalPages <= 1) {
     return null;
   }
@@ -66,4 +66,6 @@ export default function PropertiesPagination({
       </PaginationContent>
     </Pagination>
   );
-}
+};
+
+export default PropertiesPagination;

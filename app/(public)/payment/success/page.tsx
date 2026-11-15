@@ -37,11 +37,11 @@ async function PaymentSuccessContent({ searchParams }: { searchParams: SuccessSe
   );
 }
 
-export default function PaymentSuccessPage({
+const PaymentSuccessPage = ({
   searchParams,
 }: {
   searchParams: SuccessSearchParams;
-}) {
+}) => {
   return (
     <Suspense
       fallback={
@@ -54,4 +54,6 @@ export default function PaymentSuccessPage({
       <PaymentSuccessContent searchParams={searchParams} />
     </Suspense>
   );
-}
+};
+
+export default PaymentSuccessPage;

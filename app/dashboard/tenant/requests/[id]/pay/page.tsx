@@ -5,13 +5,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { createPayment } from "@/app/dashboard/_actions/tenant/createPayment";
 import { getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
 
-export default async function PaymentInitiationPage({
+const PaymentInitiationPage = async ({
   params,
   searchParams,
 }: {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ error?: string }>;
-}) {
+}) => {
   const [{ id }, { error }] = await Promise.all([params, searchParams]);
   const request = await getRentalRequestById(id);
   const amount = request?.property
@@ -112,4 +112,6 @@ export default async function PaymentInitiationPage({
           )}
         </main>
   );
-}
+};
+
+export default PaymentInitiationPage;

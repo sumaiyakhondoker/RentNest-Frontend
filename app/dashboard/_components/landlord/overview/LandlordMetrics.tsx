@@ -2,13 +2,13 @@ import { Building2, Check, Clock3, House } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import type { LandlordRentalRequest, Property } from "@/lib/types";
 
-export default function LandlordMetrics({
+const LandlordMetrics = ({
   properties,
   requests,
 }: {
   properties: Property[] | null;
   requests: LandlordRentalRequest[] | null;
-}) {
+}) => {
   const metrics = [
     {
       label: "Total properties",
@@ -56,4 +56,6 @@ export default function LandlordMetrics({
       ))}
     </div>
   );
-}
+};
+
+export default LandlordMetrics;

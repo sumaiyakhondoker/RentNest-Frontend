@@ -73,6 +73,6 @@ type Props = {
       </div>
     </section>
   );
-}
+};
 
 export default PropertyDetailsHeader

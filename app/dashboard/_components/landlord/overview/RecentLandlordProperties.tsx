@@ -6,13 +6,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import type { Property } from "@/lib/types";
 import { propertyImage } from "@/app/dashboard/_components/landlord/propertyImage";
 
-export default function RecentLandlordProperties({
+const RecentLandlordProperties = ({
   properties,
   hasError,
 }: {
   properties: Property[];
   hasError: boolean;
-}) {
+}) => {
   const money = (amount: number) =>
     new Intl.NumberFormat("en-BD", {
       style: "currency",
@@ -81,4 +81,6 @@ export default function RecentLandlordProperties({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default RecentLandlordProperties;

@@ -86,7 +86,7 @@ const PropertyDetailsPage = async({
       </div>
     </div>
   );
-}
+};
 
 
 export default  PropertyDetailsPage

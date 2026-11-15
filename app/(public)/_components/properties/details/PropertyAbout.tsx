@@ -3,9 +3,9 @@ type Props = {
   description: string;
 };
 
-export default function PropertyAbout({
+const PropertyAbout = ({
   description,
-}: Props) {
+}: Props) => {
   return (
     <section className="space-y-5">
       <h2 className="text-[25px] font-bold">
@@ -17,4 +17,6 @@ export default function PropertyAbout({
       </p>
     </section>
   );
-}
+};
+
+export default PropertyAbout;

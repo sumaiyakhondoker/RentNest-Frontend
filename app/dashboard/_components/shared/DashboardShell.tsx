@@ -7,7 +7,7 @@ import DashboardProfileMenu from "./DashboardProfileMenu";
 import DashboardNavigationLoading from "./DashboardNavigationLoading";
 import type { UserProfile } from "@/lib/types";
 
-export default function DashboardShell({
+const DashboardShell = ({
   children,
   items,
   groupLabel,
@@ -19,7 +19,7 @@ export default function DashboardShell({
   groupLabel: string;
   footer?: ReactNode;
   role: UserProfile["role"];
-}) {
+}) => {
   return (
     <SidebarProvider className="flex-col md:flex-row">
       <DashboardSidebar
@@ -46,4 +46,6 @@ export default function DashboardShell({
       </div>
     </SidebarProvider>
   );
-}
+};
+
+export default DashboardShell;

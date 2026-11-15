@@ -11,9 +11,9 @@ type Props = {
   property: Property;
 };
 
-export default function PropertySummaryCard({
+const PropertySummaryCard = ({
   property,
-}: Props) {
+}: Props) => {
   const [imageError, setImageError] = useState(false);
 
   const picture = property.picture?.trim();
@@ -72,4 +72,6 @@ export default function PropertySummaryCard({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default PropertySummaryCard;

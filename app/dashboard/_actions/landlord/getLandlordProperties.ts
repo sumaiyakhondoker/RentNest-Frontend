@@ -1,27 +1,22 @@
-import { getAllProperties } from "@/app/(public)/_actions/getProperties";
-import type { LandlordPropertiesResponse, Property } from "@/lib/types";
+import { cookies } from "next/headers";
+import type { LandlordPropertiesResponse } from "@/lib/types";
 
-export async function getLandlordProperties(
-  landlordId: string,
-): Promise<LandlordPropertiesResponse> {
-  if (!landlordId) {
-    return { success: false, message: "Landlord account not found.", data: [] };
+export async function getLandlordProperties(): Promise<LandlordPropertiesResponse> {
+  const token = (await cookies()).get("accessToken")?.value;
+  if (!token) {
+    return { success: false, message: "Please log in first.", data: [] };
   }
 
   try {
-    const firstPage = await getAllProperties({ page: "1", limit: "100" });
-    const allProperties: Property[] = [...firstPage.data.allProperties];
-
-    for (let page = 2; page <= firstPage.data.meta.totalPages; page++) {
-      const result = await getAllProperties({ page: String(page), limit: "100" });
-      allProperties.push(...result.data.allProperties);
+    const response = await fetch(`${process.env.BACKEND_API_URL}/api/landlord/properties`, {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
+    const result: LandlordPropertiesResponse = await response.json();
+    if (!response.ok || !result.success) {
+      return { success: false, message: result.message || "Could not load your properties.", data: [] };
     }
-
-    return {
-      success: true,
-      message: "Properties loaded.",
-      data: allProperties.filter((property) => property.landlordId === landlordId),
-    };
+    return result;
   } catch {
     return { success: false, message: "Could not load your properties.", data: [] };
   }

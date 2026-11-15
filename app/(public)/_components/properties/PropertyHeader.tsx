@@ -31,6 +31,6 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
       </div>
     </section>
   );
-}
+};
 
 export default PropertyHeader

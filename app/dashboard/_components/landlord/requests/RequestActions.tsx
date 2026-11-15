@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { updateLandlordRequestStatus } from "@/app/dashboard/_actions/landlord/updateLandlordRequestStatus";
 
-export default function RequestActions({ requestId }: { requestId: string }) {
+const RequestActions = ({ requestId }: { requestId: string }) => {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
 
@@ -32,4 +32,6 @@ export default function RequestActions({ requestId }: { requestId: string }) {
       </Button>
     </div>
   );
-}
+};
+
+export default RequestActions;

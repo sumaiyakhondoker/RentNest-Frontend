@@ -1,14 +1,11 @@
-import { getMe } from "@/service/getMe";
 import { getLandlordProperties } from "@/app/dashboard/_actions/landlord/getLandlordProperties";
 import { getLandlordRequests } from "@/app/dashboard/_actions/landlord/getLandlordRequests";
 import PendingRequestCard from "./PendingRequestCard";
 
-export default async function LandlordRequestsContent() {
-  const user = await getMe();
-  const landlordId = user.success ? user.data?.profile?.id || "" : "";
+const LandlordRequestsContent = async () => {
   const [requestsResult, propertiesResult] = await Promise.all([
     getLandlordRequests(),
-    getLandlordProperties(landlordId),
+    getLandlordProperties(),
   ]);
   const pendingRequests = requestsResult.success
     ? requestsResult.data.allRentalRequests
@@ -51,4 +48,6 @@ export default async function LandlordRequestsContent() {
       </main>
     </div>
   );
-}
+};
+
+export default LandlordRequestsContent;

@@ -205,7 +205,7 @@ function PropertySearchForm({
   );
 }
 
-export default function PropertySearchBar({ categories, query }: Props) {
+const PropertySearchBar = ({ categories, query }: Props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -242,4 +242,6 @@ export default function PropertySearchBar({ categories, query }: Props) {
       </Card>
     </>
   );
-}
+};
+
+export default PropertySearchBar;

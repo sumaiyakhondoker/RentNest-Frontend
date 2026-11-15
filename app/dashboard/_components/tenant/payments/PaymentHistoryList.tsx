@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getMyPayments } from "@/app/dashboard/_actions/tenant/getMyPayments";
 import { getRentalRequestById } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
 
-export default async function PaymentHistoryList() {
+const PaymentHistoryList = async () => {
   const result = await getMyPayments();
 
   if (!result.success) {
@@ -97,4 +97,6 @@ export default async function PaymentHistoryList() {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default PaymentHistoryList;
