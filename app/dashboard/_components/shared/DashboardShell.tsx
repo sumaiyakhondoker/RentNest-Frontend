@@ -1,10 +1,10 @@
 import { Suspense, type ReactNode } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { Spinner } from "@/components/ui/spinner";
 import { UserRound } from "lucide-react";
 import DashboardSidebar, { type DashboardMenuItem } from "./DashboardSidebar";
 import DashboardHeader from "./DashboardHeader";
 import DashboardProfileMenu from "./DashboardProfileMenu";
+import DashboardNavigationLoading from "./DashboardNavigationLoading";
 import type { UserProfile } from "@/lib/types";
 
 export default function DashboardShell({
@@ -40,11 +40,7 @@ export default function DashboardShell({
             </Suspense>
           }
         />
-        <Suspense fallback={
-          <div className="flex min-h-96 items-center justify-center text-primary" role="status">
-            <Spinner className="size-[55px]" />
-          </div>
-        }>
+        <Suspense fallback={<DashboardNavigationLoading />}>
           {children}
         </Suspense>
       </div>
