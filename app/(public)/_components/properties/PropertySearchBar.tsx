@@ -20,17 +20,6 @@ type Props = {
   query: PropertiesQuery;
 };
 
-function getSelectedPrice(query: PropertiesQuery): PropertySearchFormValues["priceRange"] {
-  const min = query.minPrice || "";
-  const max = query.maxPrice || "";
-
-  if (!min && max === "10000") return "under-10000";
-  if (min === "10000" && max === "20000") return "10000-20000";
-  if (min === "20000" && max === "40000") return "20000-40000";
-  if (min === "40000" && !max) return "above-40000";
-  return "all";
-}
-
 function PropertySearchForm({
   categories,
   query,
@@ -52,7 +41,8 @@ function PropertySearchForm({
       search: query.search || "",
       location: query.location || "",
       category: query.category || "all",
-      priceRange: getSelectedPrice(query),
+      minPrice: query.minPrice || "",
+      maxPrice: query.maxPrice || "",
       amenities: query.amenities || "",
     },
   });
@@ -68,22 +58,8 @@ function PropertySearchForm({
     const amenities = data.amenities.split(",").map((item) => item.trim()).filter(Boolean).join(",");
     if (amenities) params.set("amenities", amenities);
 
-    switch (data.priceRange) {
-      case "under-10000":
-        params.set("maxPrice", "10000");
-        break;
-      case "10000-20000":
-        params.set("minPrice", "10000");
-        params.set("maxPrice", "20000");
-        break;
-      case "20000-40000":
-        params.set("minPrice", "20000");
-        params.set("maxPrice", "40000");
-        break;
-      case "above-40000":
-        params.set("minPrice", "40000");
-        break;
-    }
+    if (data.minPrice) params.set("minPrice", data.minPrice);
+    if (data.maxPrice) params.set("maxPrice", data.maxPrice);
 
     startTransition(() => {
       router.push(`/properties?${params.toString()}`);
@@ -91,7 +67,7 @@ function PropertySearchForm({
   }
 
   function resetFilters() {
-    reset({ search: "", location: "", category: "all", priceRange: "all", amenities: "" });
+    reset({ search: "", location: "", category: "all", minPrice: "", maxPrice: "", amenities: "" });
     const params = new URLSearchParams(searchParams.toString());
     ["search", "location", "category", "minPrice", "maxPrice", "amenities", "page"].forEach((key) => params.delete(key));
     router.push(params.toString() ? `/properties?${params.toString()}` : "/properties");
@@ -154,26 +130,19 @@ function PropertySearchForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor={`${idPrefix}-price`}>Monthly rent</Label>
-        <Controller
-          name="priceRange"
-          control={control}
-          render={({ field }) => (
-            <Select name={field.name} value={field.value} onValueChange={field.onChange}>
-              <SelectTrigger id={`${idPrefix}-price`} ref={field.ref} onBlur={field.onBlur} aria-invalid={!!errors.priceRange} className="h-10 w-full rounded-lg">
-                <SelectValue placeholder="Any budget" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Any budget</SelectItem>
-                <SelectItem value="under-10000">Under ৳10,000</SelectItem>
-                <SelectItem value="10000-20000">৳10,000 - ৳20,000</SelectItem>
-                <SelectItem value="20000-40000">৳20,000 - ৳40,000</SelectItem>
-                <SelectItem value="above-40000">Above ৳40,000</SelectItem>
-              </SelectContent>
-            </Select>
-          )}
-        />
-        {errors.priceRange && <p className="text-xs text-destructive">{errors.priceRange.message}</p>}
+        <p className="text-sm font-medium">Monthly rent (৳)</p>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="space-y-1">
+            <Label htmlFor={`${idPrefix}-min-price`} className="text-xs text-muted-foreground">Minimum</Label>
+            <Input id={`${idPrefix}-min-price`} type="number" min="0" step="1" inputMode="numeric" placeholder="Any" {...register("minPrice")} aria-invalid={!!errors.minPrice} className="h-10 rounded-lg" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor={`${idPrefix}-max-price`} className="text-xs text-muted-foreground">Maximum</Label>
+            <Input id={`${idPrefix}-max-price`} type="number" min="0" step="1" inputMode="numeric" placeholder="Any" {...register("maxPrice")} aria-invalid={!!errors.maxPrice} className="h-10 rounded-lg" />
+          </div>
+        </div>
+        {errors.minPrice && <p className="text-xs text-destructive">{errors.minPrice.message}</p>}
+        {errors.maxPrice && <p className="text-xs text-destructive">{errors.maxPrice.message}</p>}
       </div>
 
       <div className="space-y-2">
