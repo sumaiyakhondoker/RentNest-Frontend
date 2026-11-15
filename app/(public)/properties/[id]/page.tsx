@@ -1,8 +1,10 @@
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { getPropertyDetails } from "../../_actions/getPropertyDetails";
 import PropertyDetailsHeader from "../../_components/properties/details/PropertyDetailsHeader";
@@ -69,7 +71,9 @@ const PropertyDetailsPage = async({
           </div>
 
           <aside>
-            <RentalRequest property={property} />
+            <Suspense fallback={<Skeleton className="h-[420px] w-full rounded-2xl" />}>
+              <RentalRequest property={property} />
+            </Suspense>
           </aside>
         </div>
 

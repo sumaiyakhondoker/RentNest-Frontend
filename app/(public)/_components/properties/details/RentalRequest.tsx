@@ -10,15 +10,24 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import type { PropertyDetails } from "@/lib/types";
+import { getMyRentalRequests } from "@/app/dashboard/_actions/tenant/getMyRentalRequests";
+import { rentalRequestStatusText } from "../request/rentalRequestStatusText";
 
 type Props = {
   property: PropertyDetails;
 };
 
-const RentalRequest=({
+const RentalRequest=async({
   property,
 }: Props) =>{
   const available = property.availability === "AVAILABLE";
+  const rentalRequests = await getMyRentalRequests();
+  const existingRequest = rentalRequests.success && rentalRequests.data.allRentalRequests.find(
+    (request) => request.propertyId === property.id,
+  );
+  const existingRequestText = existingRequest
+    ? rentalRequestStatusText[existingRequest.status]
+    : null;
 
   const price = `৳ ${property.price.toLocaleString("en-BD")}`;
 
@@ -91,7 +100,19 @@ const RentalRequest=({
       </CardContent>
 
       <CardFooter className="flex flex-col gap-3 px-6 pb-6">
-        {available ? (
+        {existingRequestText ? (
+          <Button size="lg" disabled className="h-[53px] w-full rounded-[10px]">
+            {existingRequestText.title}
+          </Button>
+        ) : !available ? (
+          <Button
+            size="lg"
+            disabled
+            className="h-[53px] w-full rounded-[10px]"
+          >
+            Currently unavailable
+          </Button>
+        ) : (
           <Button
             asChild
             size="lg"
@@ -101,18 +122,13 @@ const RentalRequest=({
               Request to rent <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </Button>
-        ) : (
-          <Button
-            size="lg"
-            disabled
-            className="h-[53px] w-full rounded-[10px]"
-          >
-            Currently unavailable
-          </Button>
         )}
 
         <p className="text-center text-xs text-muted-foreground">
-          No payment required to submit a request.
+          {existingRequestText?.description ||
+            (available
+              ? "No payment required to submit a request."
+              : "This property is not available for rent.")}
         </p>
       </CardFooter>
     </Card>

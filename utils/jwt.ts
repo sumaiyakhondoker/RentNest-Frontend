@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 const verifyToken = (token:string, secret:string)=>{
     try {
     const verifiedToken = jwt.verify(token, secret)
-    console.log('verified token--------------------------', verifiedToken);
+    // console.log('verified token--------------------------', verifiedToken);
     return {
         success: true,
         data: verifiedToken

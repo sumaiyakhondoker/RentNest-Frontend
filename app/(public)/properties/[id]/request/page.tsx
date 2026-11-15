@@ -2,10 +2,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Info } from "lucide-react";
+import { Suspense } from "react";
 
 import { getPropertyDetails } from "@/app/(public)/_actions/getPropertyDetails";
-import RentalRequestForm from "@/app/(public)/_components/properties/request/RentalRequestForm";
+import RentalRequestFormAccess from "@/app/(public)/_components/properties/request/RentalRequestFormAccess";
 import PropertySummaryCard from "@/app/(public)/_components/properties/request/PropertySummaryCard";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function RequestPage({
   params,
@@ -65,7 +67,9 @@ export default async function RequestPage({
         </div>
 
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
-          <RentalRequestForm propertyId={property.id} />
+          <Suspense fallback={<Skeleton className="h-[380px] w-full rounded-2xl" />}>
+            <RentalRequestFormAccess propertyId={property.id} />
+          </Suspense>
 
           <PropertySummaryCard property={property} />
         </div>

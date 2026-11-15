@@ -3,12 +3,16 @@ import { Navbar } from '@/components/shared/Navbar';
 import { getMe } from '@/service/getMe';
 import { Suspense } from 'react';
 
-const PublicLayout =async ({ children }: LayoutProps<"/">) => {
+const NavbarWithUser = async () => {
     const user = await getMe()
+    return <Navbar user={user} />
+};
+
+const PublicLayout = ({ children }: LayoutProps<"/">) => {
     return (
         <div>
       <Suspense fallback={<div className="h-18 border-b" />}>
-        <Navbar user={user} />
+        <NavbarWithUser />
       </Suspense>
 
             <main className="flex-1">{children}</main>

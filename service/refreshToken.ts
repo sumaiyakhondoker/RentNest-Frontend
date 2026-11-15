@@ -40,7 +40,7 @@ export const getNewAccessToken = async() => {
   }
 
     const result = await res.json()
-console.log('result of refreshToken.startsWith', result);
+// console.log('result of refreshToken.startsWith', result);
     return result
 
 };
